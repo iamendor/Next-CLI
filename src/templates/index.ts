@@ -1,0 +1,3 @@
+export { default as PageTemplate } from "./page.js";
+export { default as LayoutTemplate } from "./layout.js";
+export { default as LoadingTemplate } from "./loading.js";

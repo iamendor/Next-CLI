@@ -1,11 +1,17 @@
 import { join } from "path";
 import { IGeneratePage } from "../../interfaces/commands/generate/page.interface.js";
 import logger from "../../logger/index.js";
-import PageTemplate from "../../templates/page.js";
 import writeFile from "../../utils/writefile.js";
-import LayoutTemplate from "../../templates/layout.js";
+
+import {
+  PageTemplate,
+  LayoutTemplate,
+  LoadingTemplate,
+} from "../../templates/index.js";
+import { CREATE } from "../../actions.js";
 
 async function generatePage({ path, options }: IGeneratePage) {
+  console.log(options);
   const pathsplit = path.split("/");
   const name = pathsplit[pathsplit.length - 1];
 
@@ -17,7 +23,20 @@ async function generatePage({ path, options }: IGeneratePage) {
     path: page,
     content: pageTemplate,
   });
-  logger.log(page, "CREATE");
+  logger.log(page, CREATE);
+
+  // Loading Template
+  if (!options.loading) {
+    const loadingTemplate = LoadingTemplate({ name });
+    const loading = join(...pathsplit, "loading.jsx");
+
+    await writeFile({
+      path: loading,
+      content: loadingTemplate,
+    });
+
+    logger.log(loading, CREATE);
+  }
 
   //Layout Template
 
@@ -29,7 +48,7 @@ async function generatePage({ path, options }: IGeneratePage) {
       path: layout,
       content: layoutTemplate,
     });
-    logger.log(layout, "CREATE");
+    logger.log(layout, CREATE);
   }
 }
 

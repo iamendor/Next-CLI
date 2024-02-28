@@ -5,4 +5,5 @@ export interface IGeneratePage {
 
 export interface IGeneratePageOptions {
   layout: boolean;
+  loading: boolean;
 }
