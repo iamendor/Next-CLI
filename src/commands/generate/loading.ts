@@ -1,12 +1,12 @@
 import writeFile from "../../utils/writefile.js";
-import { IGenerateLoading } from "../../interfaces/commands/generate/loading.interface.js";
 import { LoadingTemplate } from "../../templates/index.js";
 import logger from "../../logger/index.js";
 import { CREATE } from "../../actions.js";
 import generatePath from "../../utils/path.js";
 import generateStyle from "./style.js";
+import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 
-function generateLoading({ path, options }: IGenerateLoading) {
+function generateLoading({ path, options }: IGenerateResource) {
   const { tsx, style } = options;
   const loadingFile = `loading.${tsx ? "tsx" : "jsx"}`;
   const genStyle = style && style != "no-style";

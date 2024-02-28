@@ -10,6 +10,12 @@
     - [ ] css | scss | nostyle - 2/3
 - [ ] configuration file
 - [ ] Custom integration of create-next-app
+- [ ] Custom routes - specify type but notice if it is created like that
+  - [ ] dynamic
+  - [ ] parallel
+  - [ ] API handler
+  - [ ] Intercepting routes
+- [ ] merge style file into one - option
 
 # Issues
 
