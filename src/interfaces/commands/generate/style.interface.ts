@@ -1,4 +1,4 @@
-export type IStyle = "css" | "no-style" | true | false;
+export type IStyle = "css" | "no-style" | false;
 
 export interface IGenerateStyle {
   path: string;

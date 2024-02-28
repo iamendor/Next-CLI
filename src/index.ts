@@ -4,7 +4,7 @@ import generateLayout from "./commands/generate/layout.js";
 import generateLoading from "./commands/generate/loading.js";
 import generateError from "./commands/generate/error.js";
 import generatePage from "./commands/generate/page.js";
-import { StyleOption, TsxOption } from "./options/index.js";
+import { NoStyleOption, StyleOption, TsxOption } from "./options.js";
 
 const program = new Command();
 
@@ -21,12 +21,12 @@ generate
   .argument("<path>")
   .option("-l, --layout")
   .option("-lo, --loading", "", true)
-  .option("-nl, --no-loading")
+  .option("-nlo, --no-loading")
   .option("-e, --error", "", true)
   .option("-ne, --no-error")
   .addOption(TsxOption)
   .addOption(StyleOption)
-  .option("--no-style")
+  .addOption(NoStyleOption)
   .action((path, options) => generateModule({ path, options }));
 
 // COMMAND: generate page
@@ -37,7 +37,7 @@ generate
   .argument("<path>")
   .addOption(TsxOption)
   .addOption(StyleOption)
-  .option("--no-style")
+  .addOption(NoStyleOption)
   .action((path, options) => generatePage({ path, options }));
 
 // COMMAND: generate layout
@@ -48,7 +48,7 @@ generate
   .argument("<path>")
   .addOption(TsxOption)
   .addOption(StyleOption)
-  .option("--no-style")
+  .addOption(NoStyleOption)
   .action((path, options) => generateLayout({ path, options }));
 
 // COMMAND: generate loading
@@ -59,7 +59,7 @@ generate
   .argument("<path>")
   .addOption(TsxOption)
   .addOption(StyleOption)
-  .option("--no-style")
+  .addOption(NoStyleOption)
   .action((path, options) => generateLoading({ path, options }));
 
 // COMMAND: generate error
@@ -70,7 +70,7 @@ generate
   .argument("<path>")
   .addOption(TsxOption)
   .addOption(StyleOption)
-  .option("--no-style")
+  .addOption(NoStyleOption)
   .action((path, options) => generateError({ path, options }));
 
 program.parse();
