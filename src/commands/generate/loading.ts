@@ -5,10 +5,10 @@ import logger from "../../logger/index.js";
 import { CREATE } from "../../actions.js";
 import generatePath from "../../utils/path.js";
 
-function generateLoading({ path }: IGenerateLoading) {
+function generateLoading({ path, options }: IGenerateLoading) {
   const { filepath, name } = generatePath({
     path,
-    filename: "loading.jsx",
+    filename: `loading.${options.tsx ? "tsx" : "jsx"}`,
   });
 
   const loadingTemplate = LoadingTemplate({ name });

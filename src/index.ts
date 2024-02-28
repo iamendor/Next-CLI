@@ -1,8 +1,9 @@
 import { Command } from "commander";
-import generatePage from "./commands/generate/page.js";
+import generateModule from "./commands/generate/module.js";
 import generateLayout from "./commands/generate/layout.js";
 import generateLoading from "./commands/generate/loading.js";
 import generateError from "./commands/generate/error.js";
+import generatePage from "./commands/generate/page.js";
 
 const program = new Command();
 
@@ -11,37 +12,54 @@ const generate = program
   .command("generate")
   .description("Generate the templates");
 
-// COMMAND: generate page
+// COMMAND: generate module
 generate
-  .command("page")
-  .description("Create a page template")
+  .command("module")
+  .alias("m")
+  .description("Create a module template")
   .argument("<path>")
+  .option("--tsx", "Generate tsx files", false)
   .option("-l, --layout")
   .option("-lo, --loading", "", true)
   .option("-nl, --no-loading")
   .option("-e, --error", "", true)
   .option("-ne, --no-error")
+  .action((path, options) => generateModule({ path, options }));
+
+// COMMAND: generate page
+generate
+  .command("page")
+  .alias("p")
+  .description("Create a page template")
+  .argument("<path>")
+  .option("--tsx", "Generate tsx files", false)
   .action((path, options) => generatePage({ path, options }));
 
 // COMMAND: generate layout
 generate
   .command("layout")
+  .alias("la")
   .description("Create a layout template")
   .argument("<path>")
-  .action((path) => generateLayout({ path }));
+  .option("--tsx", "Generate tsx files", false)
+  .action((path, options) => generateLayout({ path, options }));
 
 // COMMAND: generate loading
 generate
   .command("loading")
+  .alias("lo")
   .description("Create a loading template")
   .argument("<path>")
-  .action((path) => generateLoading({ path }));
+  .option("--tsx", "Generate tsx files", false)
+  .action((path, options) => generateLoading({ path, options }));
 
 // COMMAND: generate error
 generate
   .command("error")
+  .alias("err")
   .description("Create an error template")
   .argument("<path>")
-  .action((path) => generateError({ path }));
+  .option("--tsx", "Generate tsx files", false)
+  .action((path, options) => generateError({ path, options }));
 
 program.parse();

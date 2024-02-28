@@ -5,10 +5,10 @@ import { CREATE } from "../../actions.js";
 import { ErrorTemplate } from "../../templates/index.js";
 import { IGenerateError } from "../../interfaces/commands/generate/error.interface.js";
 
-function generateError({ path }: IGenerateError) {
+function generateError({ path, options }: IGenerateError) {
   const { filepath, name } = generatePath({
     path,
-    filename: "error.jsx",
+    filename: `error.${options.tsx ? "tsx" : "jsx"}`,
   });
 
   const errorTemplate = ErrorTemplate({ name });

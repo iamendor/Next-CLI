@@ -9,6 +9,7 @@
   - [ ] css
     - [ ] css | scss | nostyle
 - [ ] configuration file
+- [ ] Custom integration of create-next-app
 
 # Issues
 

@@ -5,10 +5,10 @@ import generatePath from "../../utils/path.js";
 import { CREATE } from "../../actions.js";
 import { LayoutTemplate } from "../../templates/index.js";
 
-function generateLayout({ path }: IGenerateLayout) {
+function generateLayout({ path, options }: IGenerateLayout) {
   const { filepath, name } = generatePath({
     path,
-    filename: "layout.jsx",
+    filename: `layout.${options.tsx ? "tsx" : "jsx"}`,
   });
 
   const layoutTemplate = LayoutTemplate({ name });
