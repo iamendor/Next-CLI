@@ -24,6 +24,8 @@ generate
   .option("-nlo, --no-loading")
   .option("-e, --error", "", true)
   .option("-ne, --no-error")
+  .option("-nf, --not-found", "", true)
+  .option("-nnf, --no-not-found")
   .option("-ms, --merge-styles", "Merge style files into one")
   .addOption(TsxOption)
   .addOption(StyleOption)

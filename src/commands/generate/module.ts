@@ -6,6 +6,7 @@ import generatePage from "./page.js";
 import generateStyle from "./style.js";
 import generatePath from "../../utils/path.js";
 import { FlagOverlapException } from "../../error/invalidflags.js";
+import generateNotFound from "./notfound.js";
 
 function generateModule({ path, options }: IGenerateModule) {
   const { style, mergeStyles } = options;
@@ -17,6 +18,10 @@ function generateModule({ path, options }: IGenerateModule) {
   }
 
   generatePage({ path, options });
+
+  if (options.notFound) {
+    generateNotFound({ path, options });
+  }
 
   if (options.loading) {
     generateLoading({ path, options });

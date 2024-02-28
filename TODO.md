@@ -6,6 +6,7 @@
   - [x] layout
   - [x] loading
   - [x] error
+  - [x] notfound
   - [x] css
     - [x] css | scss | nostyle - 2/3
 - [ ] configuration file

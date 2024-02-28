@@ -9,6 +9,7 @@ export interface IGenerateModuleOptions {
   layout: boolean;
   loading: boolean;
   error: boolean;
+  notFound: boolean;
   tsx: boolean;
   mergeStyles: boolean;
   style: IStyle;
