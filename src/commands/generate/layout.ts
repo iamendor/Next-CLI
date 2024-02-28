@@ -1,9 +1,9 @@
 import logger from "../../logger/index.js";
 import writeFile from "../../utils/writefile.js";
-import LayoutTemplate from "../../templates/layout.js";
 import { IGenerateLayout } from "../../interfaces/commands/generate/layout.interface.js";
 import generatePath from "../../utils/path.js";
 import { CREATE } from "../../actions.js";
+import { LayoutTemplate } from "../../templates/index.js";
 
 function generateLayout({ path }: IGenerateLayout) {
   const { filepath, name } = generatePath({

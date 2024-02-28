@@ -5,7 +5,7 @@
   - [x] page
   - [x] layout
   - [x] loading
-  - [ ] error
+  - [x] error
   - [ ] css
     - [ ] css | scss | nostyle
 - [ ] configuration file

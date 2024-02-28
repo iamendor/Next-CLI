@@ -2,6 +2,7 @@ import { Command } from "commander";
 import generatePage from "./commands/generate/page.js";
 import generateLayout from "./commands/generate/layout.js";
 import generateLoading from "./commands/generate/loading.js";
+import generateError from "./commands/generate/error.js";
 
 const program = new Command();
 
@@ -16,8 +17,10 @@ generate
   .description("Create a page template")
   .argument("<path>")
   .option("-l, --layout")
-  .option("--loading", "", true)
-  .option("--no-loading")
+  .option("-lo, --loading", "", true)
+  .option("-nl, --no-loading")
+  .option("-e, --error", "", true)
+  .option("-ne, --no-error")
   .action((path, options) => generatePage({ path, options }));
 
 // COMMAND: generate layout
@@ -33,5 +36,12 @@ generate
   .description("Create a loading template")
   .argument("<path>")
   .action((path) => generateLoading({ path }));
+
+// COMMAND: generate error
+generate
+  .command("error")
+  .description("Create an error template")
+  .argument("<path>")
+  .action((path) => generateError({ path }));
 
 program.parse();

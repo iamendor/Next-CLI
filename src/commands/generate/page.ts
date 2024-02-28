@@ -6,6 +6,7 @@ import {
   PageTemplate,
   LayoutTemplate,
   LoadingTemplate,
+  ErrorTemplate,
 } from "../../templates/index.js";
 import { CREATE } from "../../actions.js";
 import generatePath from "../../utils/path.js";
@@ -53,6 +54,16 @@ async function generatePage({ path, options }: IGeneratePage) {
       content: layoutTemplate,
     });
     logger.log(layout, CREATE);
+  }
+
+  if (options.error) {
+    const { name, filepath: error } = generatePath({
+      path,
+      filename: "error.jsx",
+    });
+    const errorTemplate = ErrorTemplate({ name });
+    await writeFile({ path: error, content: errorTemplate });
+    logger.log(error, CREATE);
   }
 }
 
