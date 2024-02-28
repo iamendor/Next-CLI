@@ -1,21 +1,23 @@
-import { join } from "path";
 import logger from "../../logger/index.js";
 import writeFile from "../../utils/writefile.js";
 import LayoutTemplate from "../../templates/layout.js";
 import { IGenerateLayout } from "../../interfaces/commands/generate/layout.interface.js";
+import generatePath from "../../utils/path.js";
+import { CREATE } from "../../actions.js";
 
 function generateLayout({ path }: IGenerateLayout) {
-  const pathsplit = path.split("/");
-  const name = pathsplit[pathsplit.length - 1];
-  //Layout Template
+  const { filepath, name } = generatePath({
+    path,
+    filename: "layout.jsx",
+  });
 
   const layoutTemplate = LayoutTemplate({ name });
-  const layout = join(...pathsplit, "layout.jsx");
 
   writeFile({
-    path: layout,
+    path: filepath,
     content: layoutTemplate,
   });
+  logger.log(filepath, CREATE);
 }
 
 export default generateLayout;

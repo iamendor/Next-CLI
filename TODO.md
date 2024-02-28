@@ -2,11 +2,14 @@
 
 - [ ] create generate command
   - [ ] specify tsx or jsx
-  - [ ] page
-  - [ ] layout
+  - [x] page
+  - [x] layout
+  - [x] loading
+  - [ ] error
   - [ ] css
     - [ ] css | scss | nostyle
+- [ ] configuration file
 
 # Issues
 
-- [ ] problem if i want to generate for current directory
+- [x] problem if i want to generate for current directory - #1
