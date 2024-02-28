@@ -7,14 +7,17 @@ import writeFile from "../../utils/writefile.js";
 import generateStyle from "./style.js";
 
 async function generatePage({ path, options }: IGenerateResource) {
-  const { tsx, style } = options;
-  const genStyle = style && style != "no-style";
-  const styleName = genStyle ? `./page.module.${style}` : null;
-
+  const { tsx, style, mergeStyles = false } = options;
   const { name, filepath: page } = generatePath({
     path,
     filename: `page.${tsx ? "tsx" : "jsx"}`,
   });
+  const genStyle = style && style != "no-style";
+  const styleName = genStyle
+    ? mergeStyles
+      ? `./${name}.module.${style}`
+      : `./page.module.${style}`
+    : null;
 
   //Page Template
   const pageTemplate = PageTemplate({
@@ -28,7 +31,7 @@ async function generatePage({ path, options }: IGenerateResource) {
   });
   logger.log(page, CREATE);
 
-  if (genStyle) {
+  if (genStyle && !mergeStyles) {
     generateStyle({ path, file: styleName || "" });
   }
 }

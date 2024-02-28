@@ -7,7 +7,7 @@ class Logger {
   }
   error(message: string, stacktrace?: Error) {
     console.log(chalk.red(`[ERROR] ${message}`));
-    console.log(chalk.red(stacktrace));
+    if (stacktrace) console.log(chalk.red(stacktrace));
   }
 }
 

@@ -3,8 +3,19 @@ import generateLoading from "./loading.js";
 import generateLayout from "./layout.js";
 import generateError from "./error.js";
 import generatePage from "./page.js";
+import generateStyle from "./style.js";
+import generatePath from "../../utils/path.js";
+import { FlagOverlapException } from "../../error/invalidflags.js";
 
 function generateModule({ path, options }: IGenerateModule) {
+  const { style, mergeStyles } = options;
+  const genStyle = style && style != "no-style";
+  if (!genStyle && mergeStyles) throw new FlagOverlapException();
+  if (genStyle && mergeStyles) {
+    const { name } = generatePath({ path, filename: `` });
+    generateStyle({ path, file: `${name}.module.${style}` });
+  }
+
   generatePage({ path, options });
 
   if (options.loading) {

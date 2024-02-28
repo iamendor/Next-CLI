@@ -7,15 +7,19 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 
 function generateError({ path, options }: IGenerateResource) {
-  const { tsx, style } = options;
+  const { tsx, style, mergeStyles = false } = options;
   const errorFile = `error.${tsx ? "tsx" : "jsx"}`;
-  const genStyle = style && style != "no-style";
-  const styleName = genStyle ? `./error.module.${style}` : null;
-
   const { filepath, name } = generatePath({
     path,
     filename: errorFile,
   });
+
+  const genStyle = style && style != "no-style";
+  const styleName = genStyle
+    ? mergeStyles
+      ? `./${name}.module.${style}`
+      : `./error.module.${style}`
+    : null;
 
   const errorTemplate = ErrorTemplate({
     name,
@@ -28,7 +32,7 @@ function generateError({ path, options }: IGenerateResource) {
   });
   logger.log(filepath, CREATE);
 
-  if (genStyle) {
+  if (genStyle && !mergeStyles) {
     generateStyle({ path, file: styleName || "" });
   }
 }

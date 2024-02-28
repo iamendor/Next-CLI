@@ -6,9 +6,11 @@
   - [x] layout
   - [x] loading
   - [x] error
-  - [ ] css
-    - [ ] css | scss | nostyle - 2/3
+  - [x] css
+    - [x] css | scss | nostyle - 2/3
 - [ ] configuration file
+  - [ ] default.json
+  - [ ] find in parents and load
 - [ ] Custom integration of create-next-app
 - [ ] Custom routes - specify type but notice if it is created like that
   - [ ] dynamic

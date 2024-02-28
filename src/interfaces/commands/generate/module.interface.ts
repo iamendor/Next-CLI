@@ -10,5 +10,6 @@ export interface IGenerateModuleOptions {
   loading: boolean;
   error: boolean;
   tsx: boolean;
+  mergeStyles: boolean;
   style: IStyle;
 }

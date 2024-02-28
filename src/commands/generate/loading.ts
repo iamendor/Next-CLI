@@ -7,15 +7,19 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 
 function generateLoading({ path, options }: IGenerateResource) {
-  const { tsx, style } = options;
+  const { tsx, style, mergeStyles = false } = options;
   const loadingFile = `loading.${tsx ? "tsx" : "jsx"}`;
-  const genStyle = style && style != "no-style";
-  const styleName = genStyle ? `./loading.module.${style}` : null;
-
   const { filepath, name } = generatePath({
     path,
     filename: loadingFile,
   });
+
+  const genStyle = style && style != "no-style";
+  const styleName = genStyle
+    ? mergeStyles
+      ? `./${name}.module.${style}`
+      : `./loading.module.${style}`
+    : null;
 
   const loadingTemplate = LoadingTemplate({ name, style: styleName });
 
@@ -25,7 +29,7 @@ function generateLoading({ path, options }: IGenerateResource) {
   });
   logger.log(filepath, CREATE);
 
-  if (genStyle) {
+  if (genStyle && !mergeStyles) {
     generateStyle({ path, file: styleName || "" });
   }
 }

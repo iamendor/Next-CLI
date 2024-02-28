@@ -24,6 +24,7 @@ generate
   .option("-nlo, --no-loading")
   .option("-e, --error", "", true)
   .option("-ne, --no-error")
+  .option("-ms, --merge-styles", "Merge style files into one")
   .addOption(TsxOption)
   .addOption(StyleOption)
   .addOption(NoStyleOption)

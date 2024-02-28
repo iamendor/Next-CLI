@@ -8,4 +8,5 @@ export interface IGenerateResource {
 export interface IGenerateResourceOptions {
   tsx: boolean;
   style: IStyle;
+  mergeStyles?: boolean;
 }
