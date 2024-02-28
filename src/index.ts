@@ -4,6 +4,7 @@ import generateLayout from "./commands/generate/layout.js";
 import generateLoading from "./commands/generate/loading.js";
 import generateError from "./commands/generate/error.js";
 import generatePage from "./commands/generate/page.js";
+import { StyleOption, TsxOption } from "./options/index.js";
 
 const program = new Command();
 
@@ -18,12 +19,14 @@ generate
   .alias("m")
   .description("Create a module template")
   .argument("<path>")
-  .option("--tsx", "Generate tsx files", false)
   .option("-l, --layout")
   .option("-lo, --loading", "", true)
   .option("-nl, --no-loading")
   .option("-e, --error", "", true)
   .option("-ne, --no-error")
+  .addOption(TsxOption)
+  .addOption(StyleOption)
+  .option("--no-style")
   .action((path, options) => generateModule({ path, options }));
 
 // COMMAND: generate page
@@ -32,7 +35,9 @@ generate
   .alias("p")
   .description("Create a page template")
   .argument("<path>")
-  .option("--tsx", "Generate tsx files", false)
+  .addOption(TsxOption)
+  .addOption(StyleOption)
+  .option("--no-style")
   .action((path, options) => generatePage({ path, options }));
 
 // COMMAND: generate layout
@@ -41,7 +46,9 @@ generate
   .alias("la")
   .description("Create a layout template")
   .argument("<path>")
-  .option("--tsx", "Generate tsx files", false)
+  .addOption(TsxOption)
+  .addOption(StyleOption)
+  .option("--no-style")
   .action((path, options) => generateLayout({ path, options }));
 
 // COMMAND: generate loading
@@ -50,7 +57,9 @@ generate
   .alias("lo")
   .description("Create a loading template")
   .argument("<path>")
-  .option("--tsx", "Generate tsx files", false)
+  .addOption(TsxOption)
+  .addOption(StyleOption)
+  .option("--no-style")
   .action((path, options) => generateLoading({ path, options }));
 
 // COMMAND: generate error
@@ -59,7 +68,9 @@ generate
   .alias("err")
   .description("Create an error template")
   .argument("<path>")
-  .option("--tsx", "Generate tsx files", false)
+  .addOption(TsxOption)
+  .addOption(StyleOption)
+  .option("--no-style")
   .action((path, options) => generateError({ path, options }));
 
 program.parse();

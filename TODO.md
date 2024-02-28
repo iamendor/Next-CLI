@@ -1,13 +1,13 @@
 # Features
 
 - [ ] create generate command
-  - [ ] specify tsx or jsx
+  - [x] specify tsx or jsx
   - [x] page
   - [x] layout
   - [x] loading
   - [x] error
   - [ ] css
-    - [ ] css | scss | nostyle
+    - [ ] css | scss | nostyle - 2/3
 - [ ] configuration file
 - [ ] Custom integration of create-next-app
 

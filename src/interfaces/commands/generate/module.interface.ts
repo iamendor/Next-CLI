@@ -1,3 +1,5 @@
+import { IStyle } from "./style.interface.js";
+
 export interface IGenerateModule {
   path: string;
   options: IGenerateModuleOptions;
@@ -8,4 +10,5 @@ export interface IGenerateModuleOptions {
   loading: boolean;
   error: boolean;
   tsx: boolean;
+  style: IStyle;
 }
