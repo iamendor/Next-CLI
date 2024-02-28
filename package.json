@@ -16,9 +16,11 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
+    "ejs": "^3.1.9",
     "fs": "^0.0.1-security"
   },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
     "@types/node": "^20.11.20"
   }
 }

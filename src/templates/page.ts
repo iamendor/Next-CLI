@@ -1,14 +1,13 @@
-import capitalize from "../utils/capitalize.js";
+import ejs from "ejs";
 
 interface IPageTemplate {
   name: string;
 }
 
-export default function PageTemplate({ name }: IPageTemplate) {
-  const capitalized = capitalize(name);
-
-  return `
-export default function ${capitalized}Page() {
-    return (<p>${capitalized}Page</p>)
+const template = `<% const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1); const capitalized = capitalize(name); %>
+export default function <%= capitalized %>Page(){
+  return <div><%= capitalized %>Page</div>;
 }`;
-}
+
+const generatePage = (data: IPageTemplate) => ejs.render(template, data);
+export default generatePage;

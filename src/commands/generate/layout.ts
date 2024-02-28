@@ -15,10 +15,6 @@ function generateLayout({ path }: IGenerateLayout) {
   writeFile({
     path: layout,
     content: layoutTemplate,
-    cb: (err) => {
-      if (!err) return logger.log(`${layout}`, "CREATE");
-      logger.error(err.message);
-    },
   });
 }
 

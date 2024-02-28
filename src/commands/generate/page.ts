@@ -5,7 +5,7 @@ import PageTemplate from "../../templates/page.js";
 import writeFile from "../../utils/writefile.js";
 import LayoutTemplate from "../../templates/layout.js";
 
-function generatePage({ path, options }: IGeneratePage) {
+async function generatePage({ path, options }: IGeneratePage) {
   const pathsplit = path.split("/");
   const name = pathsplit[pathsplit.length - 1];
 
@@ -13,14 +13,11 @@ function generatePage({ path, options }: IGeneratePage) {
   const pageTemplate = PageTemplate({ name });
   const page = join(...pathsplit, "page.jsx");
 
-  writeFile({
+  await writeFile({
     path: page,
     content: pageTemplate,
-    cb: (err) => {
-      if (!err) return logger.log(`${page}`, "CREATE");
-      logger.error(err.message);
-    },
   });
+  logger.log(page, "CREATE");
 
   //Layout Template
 
@@ -28,14 +25,11 @@ function generatePage({ path, options }: IGeneratePage) {
     const layoutTemplate = LayoutTemplate({ name });
     const layout = join(...pathsplit, "layout.jsx");
 
-    writeFile({
+    await writeFile({
       path: layout,
       content: layoutTemplate,
-      cb: (err) => {
-        if (!err) return logger.log(`${layout}`, "CREATE");
-        logger.error(err.message);
-      },
     });
+    logger.log(layout, "CREATE");
   }
 }
 
