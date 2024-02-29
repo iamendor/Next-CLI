@@ -12,3 +12,5 @@ export const NoStyleOption = new Option(
   "-ns, --no-style",
   "Don't create style files"
 );
+
+export const ScssOption = new Option("--scss", "Use scss for styling");

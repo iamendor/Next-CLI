@@ -9,4 +9,5 @@ export interface IGenerateResourceOptions {
   tsx: boolean;
   style: IStyle;
   mergeStyles?: boolean;
+  scss?: boolean;
 }

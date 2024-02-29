@@ -13,4 +13,5 @@ export interface IGenerateModuleOptions {
   tsx: boolean;
   mergeStyles: boolean;
   style: IStyle;
+  scss?: boolean;
 }
