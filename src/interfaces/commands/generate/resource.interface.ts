@@ -1,4 +1,5 @@
 import { IStyle } from "./style.interface.js";
+import { IType } from "./type.interface.js";
 
 export interface IGenerateResource {
   path: string;
@@ -10,4 +11,7 @@ export interface IGenerateResourceOptions {
   style: IStyle;
   mergeStyles?: boolean;
   scss?: boolean;
+  dynamic?: boolean;
+  parralel?: boolean;
+  type: IType;
 }

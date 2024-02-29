@@ -4,10 +4,15 @@ import logger from "../../logger/index.js";
 import generatePath from "../../utils/path.js";
 import writeFile from "../../utils/writefile.js";
 
-export default async function generateStyle({ path, file }: IGenerateStyle) {
+export default async function generateStyle({
+  path,
+  file,
+  type,
+}: IGenerateStyle) {
   const { filepath } = generatePath({
     path,
     filename: file,
+    type,
   });
   await writeFile({
     path: filepath,

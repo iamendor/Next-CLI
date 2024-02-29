@@ -1,16 +1,27 @@
-import { Argument, Command } from "commander";
+import { Command } from "commander";
 import generateModule from "./commands/generate/module.js";
 import generateLayout from "./commands/generate/layout.js";
 import generateLoading from "./commands/generate/loading.js";
 import generateError from "./commands/generate/error.js";
 import generatePage from "./commands/generate/page.js";
 import {
+  DynamicOption,
   NoStyleOption,
+  ParralelOption,
   ScssOption,
   StyleOption,
   TsxOption,
+  TypeOption,
 } from "./options.js";
-import { commandNotFound, listenSCSS, validatePath } from "./utils/listener.js";
+import {
+  commandNotFound,
+  listenDynamic,
+  listenParralel,
+  listenSCSS,
+  validatePath,
+} from "./utils/listener.js";
+import logger from "./logger/index.js";
+import { components } from "./groups.js";
 
 const program = new Command();
 
@@ -42,7 +53,6 @@ page
   .alias("p")
   .description("Create a page template")
   .action((path, options) => {
-    validatePath(path);
     generatePage({ path, options });
   });
 
@@ -52,7 +62,6 @@ layout
   .alias("la")
   .description("Create a layout template")
   .action((path, options) => {
-    validatePath(path);
     generateLayout({ path, options });
   });
 
@@ -62,7 +71,6 @@ loading
   .alias("lo")
   .description("Create a loading template")
   .action((path, options) => {
-    validatePath(path);
     generateLoading({ path, options });
   });
 
@@ -75,19 +83,34 @@ error
     generateError({ path, options });
   });
 
+// Map options for generating components
+generate.commands
+  .filter((command) => components.includes(command.name()))
+  .map((command) => {
+    command
+      .addOption(StyleOption)
+      .addOption(NoStyleOption)
+      .addOption(ScssOption)
+      .addOption(TypeOption)
+      .addOption(DynamicOption)
+      .addOption(ParralelOption);
+
+    command.on("option:scss", listenSCSS(command));
+    command.on("option:dynamic", listenDynamic(command));
+    command.on("option:parralel", listenParralel(command));
+  });
+
 generate.commands.map((command) => {
-  command
-    .addOption(TsxOption)
-    .addOption(StyleOption)
-    .addOption(NoStyleOption)
-    .addOption(ScssOption);
+  command.addOption(TsxOption);
   command.argument(
     "<path>",
     "Path to the files you want to create",
     validatePath,
   );
-  command.on("option:scss", listenSCSS(command));
 });
 
 program.on("command:*", commandNotFound);
+program.configureOutput({
+  outputError: (str) => logger.error(str.replace("error: ", "")),
+});
 program.parse();

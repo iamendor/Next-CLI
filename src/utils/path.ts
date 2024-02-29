@@ -4,7 +4,11 @@ import {
   RGeneratePath,
 } from "../interfaces/utils/path.interface.js";
 
-function generatePath({ path, filename }: IGeneratePath): RGeneratePath {
+function generatePath({
+  path,
+  filename,
+  type = "default",
+}: IGeneratePath): RGeneratePath {
   const pathsplit = path.split("/").filter((i) => i != ".");
   if (pathsplit.length == 0)
     return {
@@ -12,6 +16,16 @@ function generatePath({ path, filename }: IGeneratePath): RGeneratePath {
       name: getCurrentDirName(),
     };
   const name = pathsplit[pathsplit.length - 1];
+  switch (type) {
+    case "dynamic":
+      pathsplit[pathsplit.length - 1] = `[${name}]`;
+      break;
+    case "parralel":
+      pathsplit[pathsplit.length - 1] = `@${name}`;
+      break;
+    default:
+      break;
+  }
 
   return { filepath: join(...pathsplit, filename), name };
 }
