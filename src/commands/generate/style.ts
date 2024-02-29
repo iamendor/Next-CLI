@@ -8,11 +8,13 @@ export default async function generateStyle({
   path,
   file,
   type,
+  level,
 }: IGenerateStyle) {
   const { filepath } = generatePath({
     path,
     filename: file,
     type,
+    level,
   });
   await writeFile({
     path: filepath,

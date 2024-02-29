@@ -4,24 +4,36 @@ import {
   RGeneratePath,
 } from "../interfaces/utils/path.interface.js";
 
+const interceptingLevels = {
+  "0": "(.)",
+  "1": "(..)",
+  "2": "(..)(..)",
+  root: "(...)",
+};
+
 function generatePath({
   path,
   filename,
   type = "default",
+  level = "0",
 }: IGeneratePath): RGeneratePath {
   const pathsplit = path.split("/").filter((i) => i != ".");
+  const lastIndex = pathsplit.length - 1;
   if (pathsplit.length == 0)
     return {
       filepath: join(".", filename),
       name: getCurrentDirName(),
     };
-  const name = pathsplit[pathsplit.length - 1];
+  const name = pathsplit[lastIndex];
   switch (type) {
     case "dynamic":
-      pathsplit[pathsplit.length - 1] = `[${name}]`;
+      pathsplit[lastIndex] = `[${name}]`;
       break;
     case "parralel":
-      pathsplit[pathsplit.length - 1] = `@${name}`;
+      pathsplit[lastIndex] = `@${name}`;
+      break;
+    case "intercepting":
+      pathsplit[lastIndex] = `${interceptingLevels[level]}${name}`;
       break;
     default:
       break;

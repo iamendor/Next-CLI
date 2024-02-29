@@ -1,1 +1,1 @@
-export type IType = "default" | "dynamic" | "parralel";
+export type IType = "default" | "dynamic" | "parralel" | "intercepting";

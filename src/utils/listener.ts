@@ -11,6 +11,9 @@ export const listenDynamic = (program: Command) => () =>
 export const listenParralel = (program: Command) => () =>
   (program.opts().type = "parralel");
 
+export const listenIntercepting = (program: Command) => () =>
+  (program.opts().type = "intercepting");
+
 export const validatePath = (path: string) => {
   const validation = /^(?!.*[!@#$%^&*(){}[\]<>?|`~])[a-zA-Z0-9_\/-]+$/;
   if (!validation.test(path)) {

@@ -9,11 +9,11 @@ import { FlagOverlapException } from "../../error/invalidflags.js";
 import generateNotFound from "./notfound.js";
 
 function generateModule({ path, options }: IGenerateModule) {
-  const { style, mergeStyles, type } = options;
+  const { style, mergeStyles, type, level } = options;
   const genStyle = style && style != "no-style";
   if (!genStyle && mergeStyles) throw new FlagOverlapException();
   if (genStyle && mergeStyles) {
-    const { name } = generatePath({ path, filename: `` });
+    const { name } = generatePath({ path, filename: ``, level });
     generateStyle({ path, file: `${name}.module.${style}`, type });
   }
 

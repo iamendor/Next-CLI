@@ -6,6 +6,8 @@ import generateError from "./commands/generate/error.js";
 import generatePage from "./commands/generate/page.js";
 import {
   DynamicOption,
+  InterceptingOption,
+  LevelOption,
   NoStyleOption,
   ParralelOption,
   ScssOption,
@@ -16,6 +18,7 @@ import {
 import {
   commandNotFound,
   listenDynamic,
+  listenIntercepting,
   listenParralel,
   listenSCSS,
   validatePath,
@@ -93,11 +96,14 @@ generate.commands
       .addOption(ScssOption)
       .addOption(TypeOption)
       .addOption(DynamicOption)
-      .addOption(ParralelOption);
+      .addOption(ParralelOption)
+      .addOption(InterceptingOption)
+      .addOption(LevelOption);
 
     command.on("option:scss", listenSCSS(command));
     command.on("option:dynamic", listenDynamic(command));
     command.on("option:parralel", listenParralel(command));
+    command.on("option:intercepting", listenIntercepting(command));
   });
 
 generate.commands.map((command) => {

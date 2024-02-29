@@ -7,12 +7,13 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 
 function generateLayout({ path, options }: IGenerateResource) {
-  const { tsx, style, mergeStyles = false, type } = options;
+  const { tsx, style, mergeStyles = false, type, level } = options;
   const layoutFile = `layout.${tsx ? "tsx" : "jsx"}`;
   const { filepath, name } = generatePath({
     path,
     filename: layoutFile,
     type,
+    level,
   });
 
   const genStyle = style && style != "no-style";
@@ -29,7 +30,7 @@ function generateLayout({ path, options }: IGenerateResource) {
   logger.log(filepath, CREATE);
 
   if (genStyle && !mergeStyles && styleName) {
-    generateStyle({ path, file: styleName, type });
+    generateStyle({ path, file: styleName, type, level });
   }
 }
 

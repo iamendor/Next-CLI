@@ -17,7 +17,7 @@ export const TypeOption = new Option(
   "-t, --type",
   "Specify type of Next module (Dyanmic, Parralel)",
 )
-  .choices(["default", "dynamic", "parralel"])
+  .choices(["default", "dynamic", "parralel", "intercepting"])
   .default("default");
 
 export const DynamicOption = new Option(
@@ -28,5 +28,17 @@ export const ParralelOption = new Option(
   "-p, --parralel",
   "Create parralel route",
 );
+
+export const InterceptingOption = new Option(
+  "-i, --intercepting",
+  "Create intercepting route",
+);
+
+export const LevelOption = new Option(
+  "-le, --level <level>",
+  "Specify level of intercepting route",
+)
+  .choices(["0", "1", "2", "root"])
+  .default("0");
 
 export const ScssOption = new Option("--scss", "Use scss for styling");
