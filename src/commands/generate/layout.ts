@@ -6,6 +6,7 @@ import { LayoutTemplate } from "../../templates/index.js";
 import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
+import capitalize from "../../utils/capitalize.js";
 
 function generateLayout({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
@@ -24,7 +25,10 @@ function generateLayout({ path, options }: IGenerateResource) {
     default: "layout",
   });
 
-  const layoutTemplate = LayoutTemplate({ name, style: styleName });
+  const layoutTemplate = LayoutTemplate({
+    name: capitalize(name),
+    style: styleName,
+  });
 
   writeFile({
     path: filepath,

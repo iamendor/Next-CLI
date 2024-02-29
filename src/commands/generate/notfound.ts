@@ -6,6 +6,7 @@ import generatePath from "../../utils/path.js";
 import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
+import capitalize from "../../utils/capitalize.js";
 
 function generateNotFound({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
@@ -24,7 +25,10 @@ function generateNotFound({ path, options }: IGenerateResource) {
     default: "notfound",
   });
 
-  const loadingTemplate = LoadingTemplate({ name, style: styleName });
+  const loadingTemplate = LoadingTemplate({
+    name: capitalize(name),
+    style: styleName,
+  });
 
   writeFile({
     path: filepath,

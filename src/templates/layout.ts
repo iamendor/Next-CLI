@@ -6,9 +6,9 @@ interface ILayoutTemplate {
 }
 
 const template = `<% if(style){ %>import styles from "<%= style %>";<% } %>
-<% const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1); const capitalized = capitalize(name); %>
-export default function <%= capitalized %>Layout({ children }) {
-  return <div>{children}</div>
+
+export default function <%= name %>Layout({ children }) {
+  return <div>{children}</div>;
 }
 `;
 

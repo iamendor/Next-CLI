@@ -6,9 +6,9 @@ interface INotFoundTemplate {
 }
 
 const template = `<% if(style){ %>import styles from "<%= style %>";<% } %>
-<% const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1); const capitalized = capitalize(name); %>
-export default function <%= capitalized %>NotFound() {
-  return <div>Loading <%= capitalized %>...</div>
+
+export default function <%= name %>NotFound() {
+  return <div>Loading <%= name %>...</div>;
 }
 `;
 

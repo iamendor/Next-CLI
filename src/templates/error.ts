@@ -6,9 +6,9 @@ interface IErrorTemplate {
 }
 
 const template = `<% if(style){ %>import styles from "<%= style %>";<% } %>
-<% const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1); const capitalized = capitalize(name); %>
-export default function <%= capitalized %>Error() {
-  return <div><%= capitalized %>Error</div>
+
+export default function <%= name %>Error() {
+  return <div><%= name %>Error</div>;
 }
 `;
 

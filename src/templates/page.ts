@@ -6,9 +6,9 @@ interface IPageTemplate {
 }
 
 const template = `<% if(style){ %>import styles from "<%= style %>";<% } %>
-<% const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1); const capitalized = capitalize(name); %>
-export default function <%= capitalized %>Page() {
-  return <div><%= capitalized %>Page</div>;
+
+export default function <%= name %>Page() {
+  return <div><%= name %>Page</div>;
 }
 `;
 

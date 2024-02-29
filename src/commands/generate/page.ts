@@ -2,6 +2,7 @@ import { CREATE } from "../../actions.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import logger from "../../logger/index.js";
 import { PageTemplate } from "../../templates/index.js";
+import capitalize from "../../utils/capitalize.js";
 import generatePath from "../../utils/path.js";
 import generateStyleName from "../../utils/style.js";
 import writeFile from "../../utils/writefile.js";
@@ -26,7 +27,7 @@ function generatePage({ path, options }: IGenerateResource) {
 
   //Page Template
   const pageTemplate = PageTemplate({
-    name,
+    name: capitalize(name),
     style: styleName,
   });
 

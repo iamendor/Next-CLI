@@ -6,6 +6,7 @@ import { ErrorTemplate } from "../../templates/index.js";
 import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
+import capitalize from "../../utils/capitalize.js";
 
 function generateError({ path, options }: IGenerateResource) {
   const { style, mergeStyles = false, type, level, extension } = options;
@@ -24,7 +25,7 @@ function generateError({ path, options }: IGenerateResource) {
   });
 
   const errorTemplate = ErrorTemplate({
-    name,
+    name: capitalize(name),
     style: styleName,
   });
 
