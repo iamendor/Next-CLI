@@ -26,3 +26,4 @@
 # Issues
 
 - [x] problem if i want to generate for current directory - #1
+- [ ] throw error in override - #2

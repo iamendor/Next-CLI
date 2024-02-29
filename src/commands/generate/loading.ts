@@ -5,6 +5,7 @@ import { CREATE } from "../../actions.js";
 import generatePath from "../../utils/path.js";
 import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
+import generateStyleName from "../../utils/style.js";
 
 function generateLoading({ path, options }: IGenerateResource) {
   const { tsx, style, mergeStyles = false, type, level } = options;
@@ -16,10 +17,12 @@ function generateLoading({ path, options }: IGenerateResource) {
     level,
   });
 
-  const genStyle = style && style != "no-style";
-  const styleName = genStyle
-    ? `./${mergeStyles ? name : "loading"}.module.${style}`
-    : null;
+  const { genStyle, styleName } = generateStyleName({
+    style,
+    mergeStyles,
+    name,
+    default: "loading",
+  });
 
   const loadingTemplate = LoadingTemplate({ name, style: styleName });
 

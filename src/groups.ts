@@ -1,2 +1,9 @@
-export const components = ["module", "page", "layout", "loading", "notfound"];
+export const components = [
+  "module",
+  "page",
+  "layout",
+  "loading",
+  "error",
+  "notfound",
+];
 export const api = ["route"];

@@ -3,6 +3,7 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import logger from "../../logger/index.js";
 import { PageTemplate } from "../../templates/index.js";
 import generatePath from "../../utils/path.js";
+import generateStyleName from "../../utils/style.js";
 import writeFile from "../../utils/writefile.js";
 import generateStyle from "./style.js";
 
@@ -14,10 +15,13 @@ function generatePage({ path, options }: IGenerateResource) {
     type,
     level,
   });
-  const genStyle = style && style != "no-style";
-  const styleName = genStyle
-    ? `./${mergeStyles ? name : "page"}.module.${style}`
-    : null;
+
+  const { genStyle, styleName } = generateStyleName({
+    style,
+    mergeStyles,
+    name,
+    default: "page",
+  });
 
   //Page Template
   const pageTemplate = PageTemplate({

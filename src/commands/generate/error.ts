@@ -5,6 +5,7 @@ import { CREATE } from "../../actions.js";
 import { ErrorTemplate } from "../../templates/index.js";
 import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
+import generateStyleName from "../../utils/style.js";
 
 function generateError({ path, options }: IGenerateResource) {
   const { tsx, style, mergeStyles = false, type, level } = options;
@@ -15,11 +16,12 @@ function generateError({ path, options }: IGenerateResource) {
     type,
     level,
   });
-
-  const genStyle = style && style != "no-style";
-  const styleName = genStyle
-    ? `./${mergeStyles ? name : "error"}.module.${style}`
-    : null;
+  const { genStyle, styleName } = generateStyleName({
+    style,
+    mergeStyles,
+    name,
+    default: "error",
+  });
 
   const errorTemplate = ErrorTemplate({
     name,
