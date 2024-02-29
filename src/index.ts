@@ -1,4 +1,4 @@
-import { Command } from "commander";
+import { Argument, Command } from "commander";
 import generateModule from "./commands/generate/module.js";
 import generateLayout from "./commands/generate/layout.js";
 import generateLoading from "./commands/generate/loading.js";
@@ -10,7 +10,7 @@ import {
   StyleOption,
   TsxOption,
 } from "./options.js";
-import { listenSCSS } from "./utils/listener.js";
+import { commandNotFound, listenSCSS, validatePath } from "./utils/listener.js";
 
 const program = new Command();
 
@@ -24,7 +24,6 @@ const module = generate.command("module");
 module
   .alias("m")
   .description("Create a module template")
-  .argument("<path>")
   .option("-l, --layout")
   .option("-lo, --loading", "", true)
   .option("-nlo, --no-loading")
@@ -33,68 +32,62 @@ module
   .option("-nf, --not-found", "", true)
   .option("-nnf, --no-not-found")
   .option("-ms, --merge-styles", "Merge style files into one")
-  .addOption(TsxOption)
-  .addOption(StyleOption)
-  .addOption(NoStyleOption)
-  .addOption(ScssOption)
-  .action((path, options) => generateModule({ path, options }));
-
-module.on("option:scss", listenSCSS(module));
+  .action((path, options) => {
+    generateModule({ path, options });
+  });
 
 // COMMAND: generate page
 const page = generate.command("page");
 page
   .alias("p")
   .description("Create a page template")
-  .argument("<path>")
-  .addOption(TsxOption)
-  .addOption(StyleOption)
-  .addOption(NoStyleOption)
-  .addOption(ScssOption)
-  .action((path, options) => generatePage({ path, options }));
-
-page.on("option:scss", listenSCSS(page));
+  .action((path, options) => {
+    validatePath(path);
+    generatePage({ path, options });
+  });
 
 // COMMAND: generate layout
 const layout = generate.command("layout");
 layout
   .alias("la")
   .description("Create a layout template")
-  .argument("<path>")
-  .addOption(TsxOption)
-  .addOption(StyleOption)
-  .addOption(NoStyleOption)
-  .addOption(ScssOption)
-  .action((path, options) => generateLayout({ path, options }));
-
-layout.on("option:scss", listenSCSS(layout));
+  .action((path, options) => {
+    validatePath(path);
+    generateLayout({ path, options });
+  });
 
 // COMMAND: generate loading
 const loading = generate.command("loading");
 loading
   .alias("lo")
   .description("Create a loading template")
-  .argument("<path>")
-  .addOption(TsxOption)
-  .addOption(StyleOption)
-  .addOption(NoStyleOption)
-  .addOption(ScssOption)
-  .action((path, options) => generateLoading({ path, options }));
-
-loading.on("option:scss", listenSCSS(loading));
+  .action((path, options) => {
+    validatePath(path);
+    generateLoading({ path, options });
+  });
 
 // COMMAND: generate error
 const error = generate.command("error");
 error
   .alias("err")
   .description("Create an error template")
-  .argument("<path>")
-  .addOption(TsxOption)
-  .addOption(StyleOption)
-  .addOption(NoStyleOption)
-  .addOption(ScssOption)
-  .action((path, options) => generateError({ path, options }));
+  .action((path, options) => {
+    generateError({ path, options });
+  });
 
-error.on("option:scss", listenSCSS(error));
+generate.commands.map((command) => {
+  command
+    .addOption(TsxOption)
+    .addOption(StyleOption)
+    .addOption(NoStyleOption)
+    .addOption(ScssOption);
+  command.argument(
+    "<path>",
+    "Path to the files you want to create",
+    validatePath,
+  );
+  command.on("option:scss", listenSCSS(command));
+});
 
+program.on("command:*", commandNotFound);
 program.parse();

@@ -1,7 +1,7 @@
-import { Option } from "commander";
+import { Argument, Option } from "commander";
 
 export const TsxOption = new Option("--tsx", "Generate tsx files").default(
-  false
+  false,
 );
 
 export const StyleOption = new Option("-s, --style <type>", "Specify styling")
@@ -10,7 +10,7 @@ export const StyleOption = new Option("-s, --style <type>", "Specify styling")
 
 export const NoStyleOption = new Option(
   "-ns, --no-style",
-  "Don't create style files"
+  "Don't create style files",
 );
 
 export const ScssOption = new Option("--scss", "Use scss for styling");

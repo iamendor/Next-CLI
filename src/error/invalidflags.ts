@@ -7,5 +7,6 @@ export class FlagOverlapException extends Error {
     this.name = "FlagOverlapException";
     this.stack = "";
     logger.error(message);
+    process.exit(1);
   }
 }

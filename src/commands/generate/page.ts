@@ -6,7 +6,7 @@ import generatePath from "../../utils/path.js";
 import writeFile from "../../utils/writefile.js";
 import generateStyle from "./style.js";
 
-async function generatePage({ path, options }: IGenerateResource) {
+function generatePage({ path, options }: IGenerateResource) {
   const { tsx, style, mergeStyles = false } = options;
   const { name, filepath: page } = generatePath({
     path,
@@ -25,7 +25,7 @@ async function generatePage({ path, options }: IGenerateResource) {
     style: styleName,
   });
 
-  await writeFile({
+  writeFile({
     path: page,
     content: pageTemplate,
   });
