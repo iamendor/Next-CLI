@@ -8,10 +8,11 @@ import writeFile from "../../utils/writefile.js";
 import generateStyle from "./style.js";
 
 function generatePage({ path, options }: IGenerateResource) {
-  const { tsx, style, mergeStyles = false, type, level } = options;
+  const { extension, style, mergeStyles = false, type, level } = options;
+  const pageFile = `page.${extension}`;
   const { name, filepath: page } = generatePath({
     path,
-    filename: `page.${tsx ? "tsx" : "jsx"}`,
+    filename: pageFile,
     type,
     level,
   });

@@ -8,8 +8,8 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 
 function generateLayout({ path, options }: IGenerateResource) {
-  const { tsx, style, mergeStyles = false, type, level } = options;
-  const layoutFile = `layout.${tsx ? "tsx" : "jsx"}`;
+  const { extension, style, mergeStyles = false, type, level } = options;
+  const layoutFile = `layout.${extension}`;
   const { filepath, name } = generatePath({
     path,
     filename: layoutFile,

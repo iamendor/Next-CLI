@@ -8,8 +8,8 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 
 function generateError({ path, options }: IGenerateResource) {
-  const { tsx, style, mergeStyles = false, type, level } = options;
-  const errorFile = `error.${tsx ? "tsx" : "jsx"}`;
+  const { style, mergeStyles = false, type, level, extension } = options;
+  const errorFile = `error.${extension}`;
   const { filepath, name } = generatePath({
     path,
     filename: errorFile,

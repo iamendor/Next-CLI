@@ -2,6 +2,9 @@ import { Command } from "commander";
 import { InvalidPathException } from "../error/invalidpath.js";
 import { CommandNotFoundException } from "../error/notfound.js";
 
+export const listenTsx = (program: Command) => () =>
+  (program.opts().extension = "tsx");
+
 export const listenSCSS = (program: Command) => () =>
   (program.opts().style = "scss");
 

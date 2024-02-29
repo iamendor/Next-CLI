@@ -6,6 +6,7 @@ import generateError from "./commands/generate/error.js";
 import generatePage from "./commands/generate/page.js";
 import {
   DynamicOption,
+  ComponentExtOption,
   InterceptingOption,
   LevelOption,
   NoStyleOption,
@@ -21,6 +22,7 @@ import {
   listenIntercepting,
   listenParralel,
   listenSCSS,
+  listenTsx,
   validatePath,
 } from "./utils/listener.js";
 import logger from "./logger/index.js";
@@ -98,16 +100,18 @@ generate.commands
       .addOption(DynamicOption)
       .addOption(ParralelOption)
       .addOption(InterceptingOption)
-      .addOption(LevelOption);
+      .addOption(LevelOption)
+      .addOption(ComponentExtOption)
+      .addOption(TsxOption);
 
     command.on("option:scss", listenSCSS(command));
     command.on("option:dynamic", listenDynamic(command));
     command.on("option:parralel", listenParralel(command));
     command.on("option:intercepting", listenIntercepting(command));
+    command.on("option:tsx", listenTsx(command));
   });
 
 generate.commands.map((command) => {
-  command.addOption(TsxOption);
   command.argument(
     "<path>",
     "Path to the files you want to create",

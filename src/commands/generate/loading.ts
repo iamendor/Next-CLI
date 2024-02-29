@@ -8,8 +8,8 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 
 function generateLoading({ path, options }: IGenerateResource) {
-  const { tsx, style, mergeStyles = false, type, level } = options;
-  const loadingFile = `loading.${tsx ? "tsx" : "jsx"}`;
+  const { extension, style, mergeStyles = false, type, level } = options;
+  const loadingFile = `loading.${extension}`;
   const { filepath, name } = generatePath({
     path,
     filename: loadingFile,

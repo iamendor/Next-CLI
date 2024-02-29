@@ -1,5 +1,12 @@
 import { Option } from "commander";
 
+export const ComponentExtOption = new Option(
+  "-ext, --extension",
+  "Specify component files' extension",
+)
+  .choices(["tsx", "jsx"])
+  .default("jsx");
+
 export const TsxOption = new Option("--tsx", "Generate tsx files").default(
   false,
 );
