@@ -17,13 +17,14 @@
   - [ ] default.json
   - [ ] find in parents and load
 - [ ] Custom integration of create-next-app
-- [ ] Custom routes - specify type but notice if it is created like that
+- [x] Custom routes - specify type but notice if it is created like that
   - [x] dynamic
   - [x] parallel
-  - [ ] Intercepting routes
+  - [x] Intercepting routes
 - [x] merge style file into one - option
+- [ ] file transaction with 'fs-transaction'
 
 # Issues
 
 - [x] problem if i want to generate for current directory - #1
-- [ ] throw error in override - #2
+- [x] throw error in override - #2

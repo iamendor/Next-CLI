@@ -29,8 +29,7 @@ function generateLayout({ path, options }: IGenerateResource) {
   writeFile({
     path: filepath,
     content: layoutTemplate,
-  });
-  logger.log(filepath, CREATE);
+  }).then(() => logger.log(filepath, CREATE));
 
   if (genStyle && !mergeStyles && styleName) {
     generateStyle({ path, file: styleName, type, level });

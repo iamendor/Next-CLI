@@ -31,9 +31,7 @@ function generateError({ path, options }: IGenerateResource) {
   writeFile({
     path: filepath,
     content: errorTemplate,
-  });
-  logger.log(filepath, CREATE);
-
+  }).then(() => logger.log(filepath, CREATE));
   if (genStyle && !mergeStyles && styleName) {
     generateStyle({ path, file: styleName, type, level });
   }

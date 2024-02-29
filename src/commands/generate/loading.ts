@@ -29,8 +29,7 @@ function generateLoading({ path, options }: IGenerateResource) {
   writeFile({
     path: filepath,
     content: loadingTemplate,
-  });
-  logger.log(filepath, CREATE);
+  }).then(() => logger.log(filepath, CREATE));
 
   if (genStyle && !mergeStyles && styleName) {
     generateStyle({ path, file: styleName, type, level });

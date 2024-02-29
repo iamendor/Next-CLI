@@ -33,8 +33,7 @@ function generatePage({ path, options }: IGenerateResource) {
   writeFile({
     path: page,
     content: pageTemplate,
-  });
-  logger.log(page, CREATE);
+  }).then(() => logger.log(page, CREATE));
 
   if (genStyle && !mergeStyles && styleName) {
     generateStyle({ path, file: styleName, type, level });
