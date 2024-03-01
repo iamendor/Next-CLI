@@ -1,4 +1,5 @@
 import { Option } from "commander";
+import { ROUTES } from "./routes.js";
 
 export const ComponentExtOption = new Option(
   "-ext, --extension",
@@ -7,9 +8,30 @@ export const ComponentExtOption = new Option(
   .choices(["tsx", "jsx"])
   .default("jsx");
 
+export const RouteExtOption = new Option(
+  "-ext, --extension",
+  "Specify route file extension",
+)
+  .choices(["ts", "js"])
+  .default("js");
+
+export const RouteHandleOption = new Option(
+  "-ha, --handlers <handlers...>",
+  "Specify what handlers to create",
+)
+  .choices(ROUTES)
+  .default([]);
+
+export const SingleHandlerOption = new Option(
+  "-sh, --single-handler",
+  "Generate a global handler",
+);
+
 export const TsxOption = new Option("--tsx", "Generate tsx files").default(
   false,
 );
+
+export const TsOption = new Option("--ts", "Generate ts files").default(false);
 
 export const StyleOption = new Option("-s, --style <type>", "Specify styling")
   .choices(["css", "scss", "no-style"])
@@ -21,10 +43,16 @@ export const NoStyleOption = new Option(
 );
 
 export const TypeOption = new Option(
-  "-t, --type",
-  "Specify type of Next module (Dyanmic, Parralel)",
+  "-t, --type <type>",
+  "Specify type of Next module (Dyanmic, Parralel, Intercepting, Default)",
 )
   .choices(["default", "dynamic", "parralel", "intercepting"])
+  .default("default");
+export const RouteTypeOption = new Option(
+  "-t, --type <type>",
+  "Specify type of Next API route (Default, Dyanmic)",
+)
+  .choices(["default", "dynamic"])
   .default("default");
 
 export const DynamicOption = new Option(

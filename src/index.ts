@@ -15,6 +15,11 @@ import {
   StyleOption,
   TsxOption,
   TypeOption,
+  RouteExtOption,
+  RouteHandleOption,
+  TsOption,
+  SingleHandlerOption,
+  RouteTypeOption,
 } from "./options.js";
 import {
   commandNotFound,
@@ -22,11 +27,13 @@ import {
   listenIntercepting,
   listenParralel,
   listenSCSS,
+  listenTs,
   listenTsx,
   validatePath,
 } from "./utils/listener.js";
 import logger from "./logger/index.js";
 import { components } from "./groups.js";
+import generateRoute from "./commands/generate/route.js";
 
 const program = new Command();
 
@@ -87,6 +94,21 @@ error
   .action((path, options) => {
     generateError({ path, options });
   });
+
+// COMMAND: generate api route
+const route = generate.command("route");
+route
+  .alias("ro")
+  .description("Create an API route")
+  .addOption(RouteExtOption)
+  .addOption(RouteHandleOption)
+  .addOption(TsOption)
+  .addOption(SingleHandlerOption)
+  .addOption(RouteTypeOption)
+  .addOption(DynamicOption)
+  .action((path, options) => generateRoute({ path, options }));
+route.on("option:ts", listenTs(route));
+route.on("option:dynamic", listenDynamic(route));
 
 // Map options for generating components
 generate.commands

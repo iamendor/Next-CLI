@@ -10,7 +10,7 @@ import capitalize from "../../utils/capitalize.js";
 
 function generateNotFound({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
-  const loadingFile = `notfound.${extension}`;
+  const loadingFile = `not-found.${extension}`;
   const { filepath, name } = generatePath({
     path,
     filename: loadingFile,
@@ -22,7 +22,7 @@ function generateNotFound({ path, options }: IGenerateResource) {
     style,
     mergeStyles,
     name,
-    default: "notfound",
+    default: "not-found",
   });
 
   const loadingTemplate = LoadingTemplate({

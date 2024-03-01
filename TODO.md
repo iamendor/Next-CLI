@@ -10,7 +10,8 @@
   - [x] notfound
   - [x] css
     - [x] css | scss | nostyle - 2/3
-  - [ ] API handler
+  - [x] API handler
+    - [x] create a handler function
   - [ ] middleware
 
 - [ ] configuration file
@@ -23,6 +24,7 @@
   - [x] Intercepting routes
 - [x] merge style file into one - option
 - [ ] file transaction with 'fs-transaction'
+- [ ] typesafety for Typescript templates
 
 # Issues
 

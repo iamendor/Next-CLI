@@ -5,6 +5,9 @@ import { CommandNotFoundException } from "../error/notfound.js";
 export const listenTsx = (program: Command) => () =>
   (program.opts().extension = "tsx");
 
+export const listenTs = (program: Command) => () =>
+  (program.opts().extension = "ts");
+
 export const listenSCSS = (program: Command) => () =>
   (program.opts().style = "scss");
 
