@@ -28,6 +28,7 @@ function generateLayout({ path, options }: IGenerateResource) {
   const layoutTemplate = LayoutTemplate({
     name: capitalize(name),
     style: styleName,
+    typesafe: extension == "tsx",
   });
 
   writeFile({

@@ -1,13 +1,20 @@
 import ejs from "ejs";
+import { TypeSafe } from "../interfaces/typesafe.interface.js";
 
-interface IErrorTemplate {
+interface IErrorTemplate extends TypeSafe {
   name: string;
   style: string | null;
 }
 
-const template = `<% if(style){ %>import styles from "<%= style %>";<% } %>
+const template = `"use client";
+<% if(style){ %>import styles from "<%= style %>";<% } %>
+import { useEffect } from "react";
 
-export default function <%= name %>Error() {
+export default function <%= name %>Error({ error, reset }<%if(typesafe) {%>:{ error: Error, reset: () => void} <%} %> ) {
+  useEffect(() => {
+    console.error(error)
+  })
+
   return <div><%= name %>Error</div>;
 }
 `;

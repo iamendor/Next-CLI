@@ -27,6 +27,7 @@ function generateError({ path, options }: IGenerateResource) {
   const errorTemplate = ErrorTemplate({
     name: capitalize(name),
     style: styleName,
+    typesafe: extension == "tsx",
   });
 
   writeFile({

@@ -8,7 +8,7 @@ interface INotFoundTemplate {
 const template = `<% if(style){ %>import styles from "<%= style %>";<% } %>
 
 export default function <%= name %>NotFound() {
-  return <div>Loading <%= name %>...</div>;
+  return <div><%= name %> not found...</div>;
 }
 `;
 

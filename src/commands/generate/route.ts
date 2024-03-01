@@ -1,10 +1,10 @@
 import { IGenerateRoute } from "../../interfaces/commands/generate/route.interface.js";
 import generatePath from "../../utils/path.js";
-import RouteTemplate from "../../templates/route.js";
 import capitalize from "../../utils/capitalize.js";
 import writeFile from "../../utils/writefile.js";
 import logger from "../../logger/index.js";
 import { CREATE } from "../../actions.js";
+import { RouteTemplate } from "../../templates/index.js";
 
 function generateRoute({ path, options }: IGenerateRoute) {
   const { extension, handlers, singleHandler = false, type } = options;
@@ -21,6 +21,7 @@ function generateRoute({ path, options }: IGenerateRoute) {
     name: capitalize(name),
     functions: handlers,
     singleHandler: singleHandler || handlers.length == 0,
+    typesafe: extension == "ts",
   });
 
   writeFile({ path: route, content: routeTemplate }).then(() =>
