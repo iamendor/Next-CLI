@@ -6,4 +6,4 @@ export const components = [
   "error",
   "notfound",
 ];
-export const api = ["route"];
+export const api = ["route", "middleware"];

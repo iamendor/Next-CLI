@@ -22,12 +22,15 @@ import {
   RouteTypeOption,
   GetHandlerOption,
   PostHandlerOption,
+  MiddlewareMatcherOption,
+  GlobalMiddlewareOption,
 } from "./options.js";
 import {
   commandNotFound,
   listenDynamic,
   listenGetHandler,
   listenIntercepting,
+  listenMiddlewareGlobal,
   listenParralel,
   listenPostHandler,
   listenSCSS,
@@ -36,8 +39,9 @@ import {
   validatePath,
 } from "./utils/listener.js";
 import logger from "./logger/index.js";
-import { components } from "./groups.js";
+import { api, components } from "./groups.js";
 import generateRoute from "./commands/generate/route.js";
+import generateMiddleware from "./commands/generate/middleware.js";
 
 const program = new Command();
 
@@ -100,24 +104,32 @@ error
     generateError({ path, options });
   });
 
-// COMMAND: generate api route
+// COMMAND: generate route
 const route = generate.command("route");
 route
   .alias("ro")
   .description("Create an API route")
-  .addOption(RouteExtOption)
   .addOption(RouteHandleOption)
-  .addOption(TsOption)
   .addOption(SingleHandlerOption)
   .addOption(RouteTypeOption)
   .addOption(DynamicOption)
   .addOption(GetHandlerOption)
   .addOption(PostHandlerOption)
   .action((path, options) => generateRoute({ path, options }));
-route.on("option:ts", listenTs(route));
 route.on("option:dynamic", listenDynamic(route));
 route.on("option:GET", listenGetHandler(route));
 route.on("option:POST", listenPostHandler(route));
+
+// COMMAND: generate middleware
+const middleware = generate.command("middleware");
+middleware
+  .alias("mw")
+  .description("Create a middleware")
+  .addOption(MiddlewareMatcherOption)
+  .addOption(GlobalMiddlewareOption)
+  .action((path, options) => generateMiddleware({ path, options }));
+
+middleware.on("option:global", listenMiddlewareGlobal(middleware));
 
 // Map options for generating components
 generate.commands
@@ -140,6 +152,15 @@ generate.commands
     command.on("option:parralel", listenParralel(command));
     command.on("option:intercepting", listenIntercepting(command));
     command.on("option:tsx", listenTsx(command));
+  });
+
+// Map options for generating route and middleware
+generate.commands
+  .filter((command) => api.includes(command.name()))
+  .map((command) => {
+    command.addOption(TsOption).addOption(RouteExtOption);
+
+    route.on("option:ts", listenTs(command));
   });
 
 generate.commands.map((command) => {

@@ -1,6 +1,16 @@
 import { Option } from "commander";
 import { ROUTES } from "./routes.js";
 
+export const MiddlewareMatcherOption = new Option(
+  "-m, --matcher <matcher...>",
+  "Specify matchers for the middleware",
+).default([]);
+
+export const GlobalMiddlewareOption = new Option(
+  "-g, --global",
+  "Make the middleware apply to all route",
+);
+
 export const ComponentExtOption = new Option(
   "-ext, --extension",
   "Specify component files' extension",

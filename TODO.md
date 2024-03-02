@@ -12,7 +12,7 @@
     - [x] css | scss | nostyle - 2/3
   - [x] API handler
     - [x] create a handler function
-  - [ ] middleware
+  - [x] middleware
 
 - [ ] configuration file
   - [ ] default.json

@@ -3,8 +3,8 @@ import generatePath from "../../utils/path.js";
 import capitalize from "../../utils/capitalize.js";
 import writeFile from "../../utils/writefile.js";
 import logger from "../../logger/index.js";
-import { CREATE } from "../../actions.js";
 import { RouteTemplate } from "../../templates/index.js";
+import { CREATE } from "../../actions.js";
 
 function generateRoute({ path, options }: IGenerateRoute) {
   const { extension, handlers, singleHandler = false, type } = options;
