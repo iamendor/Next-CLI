@@ -17,6 +17,7 @@
 - [ ] configuration file
   - [ ] default.json
   - [ ] find in parents and load
+  - [ ] custom template?
 - [ ] Custom integration of create-next-app
 - [x] Custom routes - specify type but notice if it is created like that
   - [x] dynamic
@@ -24,9 +25,10 @@
   - [x] Intercepting routes
 - [x] merge style file into one - option
 - [ ] file transaction with 'fs-transaction'
-- [ ] typesafety for Typescript templates
+- [x] typesafety for Typescript templates
 
 # Issues
 
 - [x] problem if i want to generate for current directory - #1
 - [x] throw error in override - #2
+- [ ] api handlers option overwrites --GET and --POST flags

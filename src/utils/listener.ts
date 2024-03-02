@@ -2,6 +2,18 @@ import { Command } from "commander";
 import { InvalidPathException } from "../error/invalidpath.js";
 import { CommandNotFoundException } from "../error/notfound.js";
 
+export const listenGetHandler = (program: Command) => () => {
+  const opts = program.opts();
+  if (opts.handlers) return opts.handlers.push("GET");
+  opts.handlers = ["GET"];
+};
+
+export const listenPostHandler = (program: Command) => () => {
+  const opts = program.opts();
+  if (opts.handlers) return opts.handlers.push("POST");
+  opts.handlers = ["POST"];
+};
+
 export const listenTsx = (program: Command) => () =>
   (program.opts().extension = "tsx");
 

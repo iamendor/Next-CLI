@@ -8,16 +8,16 @@ interface IRouteTemplate extends TypeSafe {
   singleHandler?: boolean;
 }
 
-const template = `<% if(singleHandler) { %>
+const template = `<% if(singleHandler) { -%>
 export async function handler(req<%if(typesafe){%>: Request<% }%>){
   return Response.json({message: "Hello <%= name %>"})
 }
-<% }%>
-<%  for(let i=0; i<functions.length; i++){%>
+<% } -%>
+<%  for(let i=0; i<functions.length; i++){ -%>
 export async function <%= functions[i] %>(req<%if(typesafe){%>: Request<% }%>){
   return Response.json({ message: "<%= functions[i]%> <%= name %>" });
 }
-<% } %>
+<% } -%>
 `;
 
 const generateRoute = (data: IRouteTemplate) => ejs.render(template, data);

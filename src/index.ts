@@ -20,12 +20,16 @@ import {
   TsOption,
   SingleHandlerOption,
   RouteTypeOption,
+  GetHandlerOption,
+  PostHandlerOption,
 } from "./options.js";
 import {
   commandNotFound,
   listenDynamic,
+  listenGetHandler,
   listenIntercepting,
   listenParralel,
+  listenPostHandler,
   listenSCSS,
   listenTs,
   listenTsx,
@@ -40,6 +44,7 @@ const program = new Command();
 // COMMAND: generate
 const generate = program
   .command("generate")
+  .alias("g")
   .description("Generate the templates");
 
 // COMMAND: generate module
@@ -106,9 +111,13 @@ route
   .addOption(SingleHandlerOption)
   .addOption(RouteTypeOption)
   .addOption(DynamicOption)
+  .addOption(GetHandlerOption)
+  .addOption(PostHandlerOption)
   .action((path, options) => generateRoute({ path, options }));
 route.on("option:ts", listenTs(route));
 route.on("option:dynamic", listenDynamic(route));
+route.on("option:GET", listenGetHandler(route));
+route.on("option:POST", listenPostHandler(route));
 
 // Map options for generating components
 generate.commands

@@ -27,6 +27,16 @@ export const SingleHandlerOption = new Option(
   "Generate a global handler",
 );
 
+export const GetHandlerOption = new Option(
+  "--GET",
+  "Generate handler with GET method",
+);
+
+export const PostHandlerOption = new Option(
+  "--POST",
+  "Generate handler with GET method",
+);
+
 export const TsxOption = new Option("--tsx", "Generate tsx files").default(
   false,
 );

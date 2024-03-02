@@ -1,4 +1,4 @@
-import { IExtension } from "./extension.interface.js";
+import { IComponentExtension } from "./extension.interface.js";
 import { IInterceptingLevel } from "./level.interface.js";
 import { IStyle } from "./style.interface.js";
 import { IType } from "./type.interface.js";
@@ -10,7 +10,7 @@ export interface IGenerateResource {
 
 export interface IGenerateResourceOptions {
   tsx?: boolean;
-  extension: IExtension;
+  extension: IComponentExtension;
   style: IStyle;
   mergeStyles?: boolean;
   scss?: boolean;

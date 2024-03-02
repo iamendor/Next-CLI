@@ -1,4 +1,4 @@
-import { IExtension } from "./extension.interface.js";
+import { IRouteExtension } from "./extension.interface.js";
 import { IRouteType } from "./type.interface.js";
 
 export type IRouteFunction =
@@ -15,7 +15,7 @@ export interface IGenerateRoute {
 }
 
 export interface IGenerateRouteOptions {
-  extension: IExtension;
+  extension: IRouteExtension;
   handlers: IRouteFunction[];
   singleHandler?: boolean;
   type: IRouteType;

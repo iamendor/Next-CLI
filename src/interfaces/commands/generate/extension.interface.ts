@@ -1,1 +1,2 @@
-export type IExtension = "js" | "ts" | "jsx" | "tsx";
+export type IComponentExtension = "jsx" | "tsx";
+export type IRouteExtension = "js" | "ts";
