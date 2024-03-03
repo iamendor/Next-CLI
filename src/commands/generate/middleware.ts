@@ -21,9 +21,8 @@ async function generateMiddleware({ path, options }: IGenerateMiddleware) {
     matcher,
   });
 
-  await writeFile({ path: middleware, content: middlewareTemplate })
-  logger.log(middleware, CREATE),
-
+  await writeFile({ path: middleware, content: middlewareTemplate });
+  logger.log(middleware, CREATE);
 }
 
 export default generateMiddleware;

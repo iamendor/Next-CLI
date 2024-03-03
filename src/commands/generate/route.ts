@@ -24,7 +24,7 @@ async function generateRoute({ path, options }: IGenerateRoute) {
     typesafe: extension == "ts",
   });
 
-  await writeFile({ path: route, content: routeTemplate })
-  logger.log(route, CREATE),
+  await writeFile({ path: route, content: routeTemplate });
+  logger.log(route, CREATE);
 }
 export default generateRoute;
