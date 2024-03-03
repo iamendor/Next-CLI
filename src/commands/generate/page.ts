@@ -8,7 +8,7 @@ import generateStyleName from "../../utils/style.js";
 import writeFile from "../../utils/writefile.js";
 import generateStyle from "./style.js";
 
-function generatePage({ path, options }: IGenerateResource) {
+async function generatePage({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
   const pageFile = `page.${extension}`;
   const { name, filepath: page } = generatePath({
@@ -31,13 +31,14 @@ function generatePage({ path, options }: IGenerateResource) {
     style: styleName,
   });
 
-  writeFile({
+  await writeFile({
     path: page,
     content: pageTemplate,
-  }).then(() => logger.log(page, CREATE));
+  });
+  logger.log(page, CREATE);
 
   if (genStyle && !mergeStyles && styleName) {
-    generateStyle({ path, file: styleName, type, level });
+    await generateStyle({ path, file: styleName, type, level });
   }
 }
 

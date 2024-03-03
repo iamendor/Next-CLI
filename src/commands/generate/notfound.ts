@@ -8,7 +8,7 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
 
-function generateNotFound({ path, options }: IGenerateResource) {
+async function generateNotFound({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
   const loadingFile = `not-found.${extension}`;
   const { filepath, name } = generatePath({
@@ -30,13 +30,14 @@ function generateNotFound({ path, options }: IGenerateResource) {
     style: styleName,
   });
 
-  writeFile({
+  await writeFile({
     path: filepath,
     content: loadingTemplate,
-  }).then(() => logger.log(filepath, CREATE));
+  });
+  logger.log(filepath, CREATE);
 
   if (genStyle && !mergeStyles && styleName) {
-    generateStyle({ path, file: styleName, type, level });
+    await generateStyle({ path, file: styleName, type, level });
   }
 }
 

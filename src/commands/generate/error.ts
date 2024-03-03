@@ -8,7 +8,7 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
 
-function generateError({ path, options }: IGenerateResource) {
+async function generateError({ path, options }: IGenerateResource) {
   const { style, mergeStyles = false, type, level, extension } = options;
   const errorFile = `error.${extension}`;
   const { filepath, name } = generatePath({
@@ -30,12 +30,13 @@ function generateError({ path, options }: IGenerateResource) {
     typesafe: extension == "tsx",
   });
 
-  writeFile({
+  await writeFile({
     path: filepath,
     content: errorTemplate,
-  }).then(() => logger.log(filepath, CREATE));
+  });
+  logger.log(filepath, CREATE);
   if (genStyle && !mergeStyles && styleName) {
-    generateStyle({ path, file: styleName, type, level });
+    await generateStyle({ path, file: styleName, type, level });
   }
 }
 

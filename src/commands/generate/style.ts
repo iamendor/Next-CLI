@@ -18,5 +18,6 @@ export default async function generateStyle({
   });
   await writeFile({
     path: filepath,
-  }).then(() => logger.log(filepath, CREATE));
+  });
+  logger.log(filepath, CREATE);
 }

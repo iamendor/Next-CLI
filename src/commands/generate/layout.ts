@@ -8,7 +8,7 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
 
-function generateLayout({ path, options }: IGenerateResource) {
+async function generateLayout({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
   const layoutFile = `layout.${extension}`;
   const { filepath, name } = generatePath({
@@ -31,13 +31,14 @@ function generateLayout({ path, options }: IGenerateResource) {
     typesafe: extension == "tsx",
   });
 
-  writeFile({
+  await writeFile({
     path: filepath,
     content: layoutTemplate,
-  }).then(() => logger.log(filepath, CREATE));
+  });
+  logger.log(filepath, CREATE);
 
   if (genStyle && !mergeStyles && styleName) {
-    generateStyle({ path, file: styleName, type, level });
+    await generateStyle({ path, file: styleName, type, level });
   }
 }
 

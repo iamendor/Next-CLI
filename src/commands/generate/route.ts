@@ -6,7 +6,7 @@ import logger from "../../logger/index.js";
 import { RouteTemplate } from "../../templates/index.js";
 import { CREATE } from "../../actions.js";
 
-function generateRoute({ path, options }: IGenerateRoute) {
+async function generateRoute({ path, options }: IGenerateRoute) {
   const { extension, handlers, singleHandler = false, type } = options;
 
   const routeFile = `route.${extension}`;
@@ -24,8 +24,7 @@ function generateRoute({ path, options }: IGenerateRoute) {
     typesafe: extension == "ts",
   });
 
-  writeFile({ path: route, content: routeTemplate }).then(() =>
-    logger.log(route, CREATE),
-  );
+  await writeFile({ path: route, content: routeTemplate })
+  logger.log(route, CREATE),
 }
 export default generateRoute;

@@ -7,33 +7,37 @@ import generateStyle from "./style.js";
 import generatePath from "../../utils/path.js";
 import { FlagOverlapException } from "../../error/invalidflags.js";
 import generateNotFound from "./notfound.js";
+import { CREATE } from "../../actions.js";
+import logger from "../../logger/index.js";
 
-function generateModule({ path, options }: IGenerateModule) {
+async function generateModule({ path, options }: IGenerateModule) {
   const { style, mergeStyles, type, level } = options;
   const genStyle = style && style != "no-style";
   if (!genStyle && mergeStyles) throw new FlagOverlapException();
   if (genStyle && mergeStyles) {
     const { name } = generatePath({ path, filename: ``, level });
-    generateStyle({ path, file: `${name}.module.${style}`, type });
+    await generateStyle({ path, file: `${name}.module.${style}`, type });
   }
 
-  generatePage({ path, options });
+  await generatePage({ path, options });
 
   if (options.notFound) {
-    generateNotFound({ path, options });
+    await generateNotFound({ path, options });
   }
 
   if (options.loading) {
-    generateLoading({ path, options });
+    await generateLoading({ path, options });
   }
 
   if (options.layout) {
-    generateLayout({ path, options });
+    await generateLayout({ path, options });
   }
 
   if (options.error) {
-    generateError({ path, options });
+    await generateError({ path, options });
   }
+
+  logger.log("Module generated successfuly!", CREATE);
 }
 
 export default generateModule;

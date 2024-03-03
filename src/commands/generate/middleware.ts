@@ -6,7 +6,7 @@ import capitalize from "../../utils/capitalize.js";
 import generatePath from "../../utils/path.js";
 import writeFile from "../../utils/writefile.js";
 
-function generateMiddleware({ path, options }: IGenerateMiddleware) {
+async function generateMiddleware({ path, options }: IGenerateMiddleware) {
   const { extension, matcher } = options;
 
   const routeFile = `middleware.${extension}`;
@@ -21,9 +21,9 @@ function generateMiddleware({ path, options }: IGenerateMiddleware) {
     matcher,
   });
 
-  writeFile({ path: middleware, content: middlewareTemplate }).then(() =>
-    logger.log(middleware, CREATE),
-  );
+  await writeFile({ path: middleware, content: middlewareTemplate })
+  logger.log(middleware, CREATE),
+
 }
 
 export default generateMiddleware;

@@ -8,7 +8,7 @@ import { IGenerateResource } from "../../interfaces/commands/generate/resource.i
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
 
-function generateLoading({ path, options }: IGenerateResource) {
+async function generateLoading({ path, options }: IGenerateResource) {
   const { extension, style, mergeStyles = false, type, level } = options;
   const loadingFile = `loading.${extension}`;
   const { filepath, name } = generatePath({
