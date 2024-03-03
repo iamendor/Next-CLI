@@ -40,30 +40,51 @@ import generateError from "./commands/generate/error.js";
 import generateRoute from "./commands/generate/route.js";
 import generateMiddleware from "./commands/generate/middleware.js";
 import { api, components } from "./utils/groups.js";
+import { IConfiguration } from "./interfaces/configuration.interface.js";
 
-export default function init(root: Command) {
+export default function init(root: Command, configuration?: IConfiguration) {
   // COMMAND: generate
   const generate = root
     .command("generate")
     .alias("g")
     .description("Generate the templates");
-  initGenerators(generate);
+  initGenerators(generate, configuration);
 }
 
-function initGenerators(generate: Command) {
+function initGenerators(generate: Command, configuration?: IConfiguration) {
   // COMMAND: generate module
   const module = generate.command("module");
   module
     .alias("m")
     .description("Create a module template")
-    .option("-l, --layout")
-    .option("-lo, --loading", "", true)
+    .option(
+      "-l, --layout",
+      "Add layout file",
+      configuration?.generate?.module?.layout || false,
+    )
+    .option(
+      "-lo, --loading",
+      "Add loading file",
+      configuration?.generate?.module?.loading == false ? false : true,
+    )
     .option("-nlo, --no-loading")
-    .option("-e, --error", "", true)
+    .option(
+      "-e, --error",
+      "Add error file",
+      configuration?.generate?.module?.error == false ? false : true,
+    )
     .option("-ne, --no-error")
-    .option("-nf, --not-found", "", true)
+    .option(
+      "-nf, --not-found",
+      "Add not found file",
+      configuration?.generate?.module?.notFound == false ? false : true,
+    )
     .option("-nnf, --no-not-found")
-    .option("-ms, --merge-styles", "Merge style files into one")
+    .option(
+      "-ms, --merge-styles",
+      "Merge style files into one",
+      configuration?.generate?.module?.mergeStyles || false,
+    )
     .action((path, options) => {
       generateModule({ path, options });
     });
@@ -109,8 +130,14 @@ function initGenerators(generate: Command) {
   route
     .alias("ro")
     .description("Create an API route")
-    .addOption(RouteHandleOption)
-    .addOption(SingleHandlerOption)
+    .addOption(
+      RouteHandleOption.default(configuration?.generate?.route?.handlers),
+    )
+    .addOption(
+      SingleHandlerOption.default(
+        configuration?.generate?.route?.singleHandler,
+      ),
+    )
     .addOption(RouteTypeOption)
     .addOption(DynamicOption)
     .addOption(GetHandlerOption)
@@ -136,7 +163,7 @@ function initGenerators(generate: Command) {
     .filter((command) => components.includes(command.name()))
     .map((command) => {
       command
-        .addOption(StyleOption)
+        .addOption(StyleOption.default(configuration?.style))
         .addOption(NoStyleOption)
         .addOption(ScssOption)
         .addOption(TypeOption)
@@ -144,7 +171,11 @@ function initGenerators(generate: Command) {
         .addOption(ParralelOption)
         .addOption(InterceptingOption)
         .addOption(LevelOption)
-        .addOption(ComponentExtOption)
+        .addOption(
+          ComponentExtOption.default(
+            configuration?.extension == "ts" ? "tsx" : "jsx",
+          ),
+        )
         .addOption(TsxOption);
 
       command.on("option:scss", listenSCSS(command));
@@ -158,7 +189,13 @@ function initGenerators(generate: Command) {
   generate.commands
     .filter((command) => api.includes(command.name()))
     .map((command) => {
-      command.addOption(TsOption).addOption(RouteExtOption);
+      command
+        .addOption(TsOption)
+        .addOption(
+          RouteExtOption.default(
+            configuration?.extension == "ts" ? "ts" : "js",
+          ),
+        );
 
       route.on("option:ts", listenTs(command));
     });
