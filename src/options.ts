@@ -1,5 +1,5 @@
 import { Option } from "commander";
-import { ROUTES } from "./routes.js";
+import { ROUTES } from "./utils/routes.js";
 
 export const MiddlewareMatcherOption = new Option(
   "-m, --matcher <matcher...>",

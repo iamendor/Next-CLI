@@ -9,6 +9,9 @@ class Logger {
     console.log(chalk.red(`[ERROR] ${message}`));
     if (stacktrace) console.log(chalk.red(stacktrace));
   }
+  info(message: string, stack?: string) {
+    console.log(chalk.blue(`[${stack || this.STACK}] ${message}`));
+  }
 }
 
 export default new Logger();

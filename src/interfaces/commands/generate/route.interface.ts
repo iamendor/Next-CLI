@@ -17,6 +17,8 @@ export interface IGenerateRoute {
 export interface IGenerateRouteOptions {
   extension: IRouteExtension;
   handlers: IRouteFunction[];
-  singleHandler?: boolean;
+  singleHandler: boolean;
   type: IRouteType;
+  GET: boolean;
+  POST: boolean;
 }

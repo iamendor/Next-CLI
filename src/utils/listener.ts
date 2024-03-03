@@ -2,9 +2,8 @@ import { Command } from "commander";
 import { InvalidPathException } from "../error/invalidpath.js";
 import { CommandNotFoundException } from "../error/notfound.js";
 
-export const listenMiddlewareGlobal = (program: Command) => () => {
-  program.opts().matcher = ["/((?!_next/static|_next/image|favicon.ico).*)"];
-};
+export const listenMiddlewareGlobal = (program: Command) => () =>
+  (program.opts().matcher = ["/((?!_next/static|_next/image|favicon.ico).*)"]);
 
 export const listenGetHandler = (program: Command) => () => {
   const opts = program.opts();
