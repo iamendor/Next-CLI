@@ -1,0 +1,17 @@
+{
+  "extension": "js",
+  "style": "css",
+  "generate": {
+    "module": {
+      "loading": true,
+      "layout": false,
+      "error": true,
+      "notFound": true,
+      "mergeStyles": false
+    },
+    "route": {
+      "handlers": ["GET", "POST"],
+      "singleHandler": true
+    }
+  }
+}

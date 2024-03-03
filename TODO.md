@@ -14,9 +14,9 @@
     - [x] create a handler function
   - [x] middleware
 
-- [ ] configuration file
+- [x] configuration file
   - [ ] default.json
-  - [ ] find in parents and load
+  - [x] find in parents and load
   - [ ] custom template?
 - [ ] Custom integration of create-next-app
 - [x] Custom routes - specify type but notice if it is created like that
@@ -26,6 +26,7 @@
 - [x] merge style file into one - option
 - [ ] file transaction with 'fs-transaction'
 - [x] typesafety for Typescript templates
+- [ ] README
 
 # Issues
 

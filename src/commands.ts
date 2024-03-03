@@ -41,6 +41,7 @@ import generateRoute from "./commands/generate/route.js";
 import generateMiddleware from "./commands/generate/middleware.js";
 import { api, components } from "./utils/groups.js";
 import { IConfiguration } from "./interfaces/configuration.interface.js";
+import initConfig from "./commands/init/config.js";
 
 export default function init(root: Command, configuration?: IConfiguration) {
   // COMMAND: generate
@@ -48,7 +49,23 @@ export default function init(root: Command, configuration?: IConfiguration) {
     .command("generate")
     .alias("g")
     .description("Generate the templates");
+  // COMMAND: init
+  const init = root
+    .command("init")
+    .alias("i")
+    .description("Initialize Next CLI");
+
+  initConfiguration(init);
   initGenerators(generate, configuration);
+}
+
+function initConfiguration(init: Command) {
+  const config = init.command("config");
+
+  config
+    .alias("c")
+    .description("Create default configuration file")
+    .action(() => initConfig(import.meta.dirname));
 }
 
 function initGenerators(generate: Command, configuration?: IConfiguration) {
