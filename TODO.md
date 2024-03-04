@@ -15,7 +15,7 @@
   - [x] middleware
 
 - [x] configuration file
-  - [ ] default.json
+  - [x] default.json
   - [x] find in parents and load
   - [ ] custom template?
 - [ ] Custom integration of create-next-app
