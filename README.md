@@ -2,7 +2,7 @@
 
 ### A powerful CLI to create Next.js templates
 
-###### Version: 1.0.5
+###### Version: 1.0.6
 
 I created this tool, because my stack is Nest.js and Next.js, and I wanted to create a CLI tool for Next.js like Nest. Currently works as a standalone package, but I am planning to integrate the official next cli into this tool.
 

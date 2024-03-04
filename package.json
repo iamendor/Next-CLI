@@ -1,6 +1,6 @@
 {
   "name": "@iamendor/next-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "type": "module",
   "main": "./dist/index.js",
@@ -15,11 +15,7 @@
     "prepack": "npmignore --auto"
   },
   "publishConfig": {
-    "ignore": [
-      "examples",
-      "node_modules",
-      "TODO.md"
-    ]
+    "ignore": ["examples", "node_modules", "TODO.md"]
   },
   "keywords": [],
   "author": "iamendor",
