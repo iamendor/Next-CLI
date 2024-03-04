@@ -8,9 +8,9 @@ I created this tool, because my stack is Nest.js and Next.js, and I wanted to cr
 
 # Documentation
 
-- [Installation](##installation)
-- [Initialize](##quick-start)
-- [Commands](##commands)
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Commands](#commands)
 
 ## Installation
 
@@ -30,17 +30,17 @@ The CLI does not require to use the configuration file, but I recommend to confi
 
 ## Commands
 
-- [init](###init)
-  - [config](####config)
-- [generate](###generate)
-  - [module](####module)
-  - [page](####page)
-  - [layout](####layout)
-  - [notfound](####notfound)
-  - [error](####error)
-  - [loading](####loading)
-  - [route](####route)
-  - [middleware](####middleware)
+- [init](#init)
+  - [config](#config)
+- [generate](#generate)
+  - [module](#module)
+  - [page](#page)
+  - [layout](#layout)
+  - [notfound](#not-found)
+  - [error](#error)
+  - [loading](#loading)
+  - [route](#route)
+  - [middleware](#middleware)
 
 ### Init
 
@@ -82,9 +82,9 @@ Generate a page file
 
 ##### Flags
 
-- `--style`, `--no-style` - see in [module](####module) command
-- `--type` - see in [module](####module)
-- `--level` - see in [module](####module)
+- `--style`, `--no-style` - see in [module](#module)
+- `--type` - see in [module](#module)
+- `--level` - see in [module](#module)
 
 #### Layout
 
@@ -96,9 +96,9 @@ Generate a layout file
 
 ##### Flags
 
-- `--style`, `--no-style` - see in [module](####module) command
-- `--type` - see in [module](####module)
-- `--level` - see in [module](####module)
+- `--style`, `--no-style` - see in [module](#module)
+- `--type` - see in [module](#module)
+- `--level` - see in [module](#module)
 
 #### Error
 
@@ -110,9 +110,9 @@ Generate an error file
 
 ##### Flags
 
-- `--style`, `--no-style` - see in [module](####module) command
-- `--type` - see in [module](####module)
-- `--level` - see in [module](####module)
+- `--style`, `--no-style` - see in [module](#module)
+- `--type` - see in [module](#module)
+- `--level` - see in [module](#module)
 
 #### Loading
 
@@ -124,9 +124,9 @@ Generate an loading file
 
 ##### Flags
 
-- `--style`, `--no-style` - see in [module](####module) command
-- `--type` - see in [module](####module)
-- `--level` - see in [module](####module)
+- `--style`, `--no-style` - see in [module](#module) command
+- `--type` - see in [module](#module)
+- `--level` - see in [module](#module)
 
 #### Not found
 
@@ -138,9 +138,9 @@ Generate a not found file
 
 ##### Flags
 
-- `--style`, `--no-style` - see in [module](####module) command
-- `--type` - see in [module](####module)
-- `--level` - see in [module](####module)
+- `--style`, `--no-style` - see in [module](#module) command
+- `--type` - see in [module](#module)
+- `--level` - see in [module](#module)
 
 #### Route
 
@@ -152,7 +152,7 @@ Generate a route file
 
 ##### Flags
 
-- `--type` - see in [module](####module), available options: _default_, _dynamic_, flag `--dynamic` is also available
+- `--type` - see in [module](#module), available options: _default_, _dynamic_, flag `--dynamic` is also available
 - `--handlers` - List of handlers to create, available options: _GET_, _POST_, _PUT_, _PATCH_, _DELETE_. <br> You can also specify `--GET`, `--POST` flags to add these handlers
 - `--single-handler` - Create a global handler for route
 
