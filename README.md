@@ -2,7 +2,7 @@
 
 ### A powerful CLI to create Next.js templates
 
-###### Version: 1.0.6
+###### Version: 1.0.7
 
 I created this tool, because my stack is Nest.js and Next.js, and I wanted to create a CLI tool for Next.js like Nest. Currently works as a standalone package, but I am planning to integrate the official next cli into this tool.
 
@@ -15,7 +15,7 @@ I created this tool, because my stack is Nest.js and Next.js, and I wanted to cr
 ## Installation
 
 ```
-npm install -g ncli
+npm install -g @iamendor/next-cli
 ```
 
 ## Quick start
@@ -23,7 +23,7 @@ npm install -g ncli
 You can create a configuration file to configure the cli.
 
 ```
-ncli init config
+next-cli init config
 ```
 
 The CLI does not require to use the configuration file, but I recommend to configure it per project to configure the extension, styling and etc. See the example configuration file [here](examples/example-config.json).
@@ -56,7 +56,7 @@ If you want to use typescript, specify <br> <code>--ts</code> flag in command **
 #### Module
 
 ```
-ncli generate module <path>
+next-cli generate module <path>
 ```
 
 Generate a Next.js module, this includes a page, loading, error, and not found pages, you can also include a layout file, creates a style file for every file.
@@ -75,7 +75,7 @@ Generate a Next.js module, this includes a page, loading, error, and not found p
 #### Page
 
 ```
-ncli generate page <path>
+next-cli generate page <path>
 ```
 
 Generate a page file
@@ -89,7 +89,7 @@ Generate a page file
 #### Layout
 
 ```
-ncli generate layout <path>
+next-cli generate layout <path>
 ```
 
 Generate a layout file
@@ -103,7 +103,7 @@ Generate a layout file
 #### Error
 
 ```
-ncli generate error <path>
+next-cli generate error <path>
 ```
 
 Generate an error file
@@ -117,7 +117,7 @@ Generate an error file
 #### Loading
 
 ```
-ncli generate loading <path>
+next-cli generate loading <path>
 ```
 
 Generate an loading file
@@ -131,7 +131,7 @@ Generate an loading file
 #### Not found
 
 ```
-ncli generate notfound <path>
+next-cli generate notfound <path>
 ```
 
 Generate a not found file
@@ -145,7 +145,7 @@ Generate a not found file
 #### Route
 
 ```
-ncli generate route <path>
+next-cli generate route <path>
 ```
 
 Generate a route file
@@ -159,7 +159,7 @@ Generate a route file
 #### Middleware
 
 ```
-ncli generate middleware <path>
+next-cli generate middleware <path>
 ```
 
 Generate a middleware file

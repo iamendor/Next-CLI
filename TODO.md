@@ -24,12 +24,10 @@
   - [x] parallel
   - [x] Intercepting routes
 - [x] merge style file into one - option
-- [ ] file transaction with 'fs-transaction'
 - [x] typesafety for Typescript templates
-- [ ] README
+- [x] README
 
 # Issues
 
 - [x] problem if i want to generate for current directory - #1
 - [x] throw error in override - #2
-- [ ] api handlers option overwrites --GET and --POST flags
