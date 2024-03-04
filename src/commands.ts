@@ -42,6 +42,7 @@ import generateMiddleware from "./commands/generate/middleware.js";
 import { api, components } from "./utils/groups.js";
 import { IConfiguration } from "./interfaces/configuration.interface.js";
 import initConfig from "./commands/init/config.js";
+import generateNotFound from "./commands/generate/notfound.js";
 
 export default function init(root: Command, configuration?: IConfiguration) {
   // COMMAND: generate
@@ -132,6 +133,13 @@ function initGenerators(generate: Command, configuration?: IConfiguration) {
     .action((path, options) => {
       generateLoading({ path, options });
     });
+
+  // COMMAND: generate not-found
+  const notfound = generate.command("notfound");
+  notfound
+    .alias("nf")
+    .description("Create a not found template")
+    .action((path, options) => generateNotFound({ path, options }));
 
   // COMMAND: generate error
   const error = generate.command("error");

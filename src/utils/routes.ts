@@ -1,1 +1,1 @@
-export const ROUTES = ["GET", "POST", "PUT", "DELETE"];
+export const ROUTES = ["GET", "POST", "PUT", "PATCH", "DELETE"];

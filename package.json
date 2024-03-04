@@ -1,20 +1,28 @@
 {
-  "name": "next-cli",
-  "version": "1.0.0",
+  "name": "@iamendor/next-cli",
+  "version": "1.0.5",
   "description": "",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "next-cli": "dist/index.js"
+    "next-cli": "./dist/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "watch": "tsc --watch",
-    "start": "node ."
+    "start": "node .",
+    "prepack": "npmignore --auto"
+  },
+  "publishConfig": {
+    "ignore": [
+      "examples",
+      "node_modules",
+      "TODO.md"
+    ]
   },
   "keywords": [],
-  "author": "",
+  "author": "iamendor",
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.3.0",
@@ -24,6 +32,7 @@
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
-    "@types/node": "^20.11.20"
+    "@types/node": "^20.11.20",
+    "npmignore": "^0.3.1"
   }
 }

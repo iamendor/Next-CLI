@@ -18,5 +18,6 @@
     /*Runtime*/
     "lib": ["esnext"],
     "declaration": true
-  }
+  },
+  "include": ["./src/**/*.json", "./src/**/*.ts"]
 }
