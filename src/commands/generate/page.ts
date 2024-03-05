@@ -1,14 +1,16 @@
-import { CREATE } from "../../actions.js";
+import { CREATE, WRITE } from "../../actions.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import logger from "../../logger/index.js";
 import { PageTemplate } from "../../templates/index.js";
 import capitalize from "../../utils/capitalize.js";
 import generatePath from "../../utils/path.js";
 import generateStyleName from "../../utils/style.js";
-import writeFile from "../../utils/writefile.js";
+import { Transaction } from "../../utils/transaction.js";
 import generateStyle from "./style.js";
 
-async function generatePage({ path, options }: IGenerateResource) {
+async function generatePage({ path, options, ts }: IGenerateResource) {
+  const transaction = ts || new Transaction({});
+
   const { extension, style, mergeStyles = false, type, level } = options;
   const pageFile = `page.${extension}`;
   const { name, filepath: page } = generatePath({
@@ -31,14 +33,24 @@ async function generatePage({ path, options }: IGenerateResource) {
     style: styleName,
   });
 
-  await writeFile({
+  transaction.operation({
+    action: CREATE,
     path: page,
-    content: pageTemplate,
+    data: pageTemplate,
   });
-  logger.log(page, CREATE);
 
   if (genStyle && !mergeStyles && styleName) {
-    await generateStyle({ path, file: styleName, type, level });
+    await generateStyle({
+      path,
+      file: styleName,
+      type,
+      level,
+      ts: transaction,
+    });
+  }
+
+  if (!ts) {
+    await transaction.execute();
   }
 }
 

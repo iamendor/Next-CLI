@@ -9,35 +9,37 @@ import { FlagOverlapException } from "../../error/invalidflags.js";
 import generateNotFound from "./notfound.js";
 import { CREATE } from "../../actions.js";
 import logger from "../../logger/index.js";
+import { Transaction } from "../../utils/transaction.js";
 
 async function generateModule({ path, options }: IGenerateModule) {
+  const ts = new Transaction({});
   const { style, mergeStyles, type, level } = options;
   const genStyle = style && style != "no-style";
   if (!genStyle && mergeStyles) throw new FlagOverlapException();
   if (genStyle && mergeStyles) {
     const { name } = generatePath({ path, filename: ``, level });
-    await generateStyle({ path, file: `${name}.module.${style}`, type });
+    await generateStyle({ path, file: `${name}.module.${style}`, type, ts });
   }
 
-  await generatePage({ path, options });
+  await generatePage({ path, options, ts });
 
   if (options.notFound) {
-    await generateNotFound({ path, options });
+    await generateNotFound({ path, options, ts });
   }
 
   if (options.loading) {
-    await generateLoading({ path, options });
+    await generateLoading({ path, options, ts });
   }
 
   if (options.layout) {
-    await generateLayout({ path, options });
+    await generateLayout({ path, options, ts });
   }
 
   if (options.error) {
-    await generateError({ path, options });
+    await generateError({ path, options, ts });
   }
-
-  logger.log("Module generated successfuly!", CREATE);
+  await ts.execute();
+  if (ts.success) logger.log("Module generated successfuly!", CREATE);
 }
 
 export default generateModule;

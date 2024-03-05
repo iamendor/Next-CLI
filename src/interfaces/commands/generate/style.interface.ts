@@ -1,3 +1,4 @@
+import { Transaction } from "../../../utils/transaction.js";
 import { IInterceptingLevel } from "./level.interface.js";
 import { IType } from "./type.interface.js";
 
@@ -8,4 +9,5 @@ export interface IGenerateStyle {
   file: string;
   type: IType;
   level?: IInterceptingLevel;
+  ts?: Transaction;
 }

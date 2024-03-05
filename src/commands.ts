@@ -188,7 +188,7 @@ function initGenerators(generate: Command, configuration?: IConfiguration) {
     .filter((command) => components.includes(command.name()))
     .map((command) => {
       command
-        .addOption(StyleOption.default(configuration?.style))
+        .addOption(StyleOption.default(configuration?.style || "css"))
         .addOption(NoStyleOption)
         .addOption(ScssOption)
         .addOption(TypeOption)
