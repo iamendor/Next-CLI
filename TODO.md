@@ -13,7 +13,7 @@
   - [x] API handler
     - [x] create a handler function
   - [x] middleware
-  - [ ] component
+  - [x] component
 
 - [x] configuration file
   - [x] default.json

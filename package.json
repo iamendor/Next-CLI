@@ -1,9 +1,9 @@
 {
   "name": "@iamendor/next-cli",
-  "version": "1.0.7",
-  "description": "",
+  "version": "1.0.8",
+  "description": "A powerful CLI to create Next.js templates",
   "type": "module",
-  "homepage": "https://github.com/iamendor/Next-CLI",
+  "homepage": "https://github.com/iamendor/Next-CLI#readme",
   "bugs": {
     "url": "https://github.com/iamendor/Next-CLI/issues"
   },

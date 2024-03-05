@@ -43,6 +43,7 @@ import { api, components } from "./utils/groups.js";
 import { IConfiguration } from "./interfaces/configuration.interface.js";
 import initConfig from "./commands/init/config.js";
 import generateNotFound from "./commands/generate/notfound.js";
+import generateComponent from "./commands/generate/component.js";
 
 export default function init(root: Command, configuration?: IConfiguration) {
   // COMMAND: generate
@@ -70,6 +71,10 @@ function initConfiguration(init: Command) {
 }
 
 function initGenerators(generate: Command, configuration?: IConfiguration) {
+  const compExtOption = ComponentExtOption.default(
+    configuration?.extension == "ts" ? "tsx" : "jsx",
+  );
+  const styleOption = StyleOption.default(configuration?.style || "css");
   // COMMAND: generate module
   const module = generate.command("module");
   module
@@ -150,6 +155,20 @@ function initGenerators(generate: Command, configuration?: IConfiguration) {
       generateError({ path, options });
     });
 
+  // COMMAND: generate component
+  const component = generate.command("component");
+  component
+    .alias("c")
+    .description("Create a component template")
+    .addOption(compExtOption)
+    .addOption(styleOption)
+    .addOption(ScssOption)
+    .addOption(TsxOption)
+    .action((path, options) => generateComponent({ path, options }));
+
+  component.on("option:tsx", listenTsx(component));
+  component.on("option:scss", listenSCSS(component));
+
   // COMMAND: generate route
   const route = generate.command("route");
   route
@@ -188,7 +207,7 @@ function initGenerators(generate: Command, configuration?: IConfiguration) {
     .filter((command) => components.includes(command.name()))
     .map((command) => {
       command
-        .addOption(StyleOption.default(configuration?.style || "css"))
+        .addOption(styleOption)
         .addOption(NoStyleOption)
         .addOption(ScssOption)
         .addOption(TypeOption)
@@ -196,11 +215,7 @@ function initGenerators(generate: Command, configuration?: IConfiguration) {
         .addOption(ParralelOption)
         .addOption(InterceptingOption)
         .addOption(LevelOption)
-        .addOption(
-          ComponentExtOption.default(
-            configuration?.extension == "ts" ? "tsx" : "jsx",
-          ),
-        )
+        .addOption(ComponentExtOption)
         .addOption(TsxOption);
 
       command.on("option:scss", listenSCSS(command));

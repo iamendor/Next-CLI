@@ -1,6 +1,5 @@
-import { CREATE, WRITE } from "../../actions.js";
+import { CREATE } from "../../actions.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
-import logger from "../../logger/index.js";
 import { PageTemplate } from "../../templates/index.js";
 import capitalize from "../../utils/capitalize.js";
 import generatePath from "../../utils/path.js";
