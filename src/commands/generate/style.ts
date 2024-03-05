@@ -9,6 +9,7 @@ export default async function generateStyle({
   file,
   type,
   level,
+  ts,
 }: IGenerateStyle) {
   const { filepath } = generatePath({
     path,
@@ -16,6 +17,9 @@ export default async function generateStyle({
     type,
     level,
   });
+
+  if (ts) return ts.operation({ action: CREATE, path: filepath, data: "" });
+
   await writeFile({
     path: filepath,
   });

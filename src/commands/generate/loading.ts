@@ -7,11 +7,14 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
+import { Transaction } from "../../utils/transaction.js";
 
-async function generateLoading({ path, options }: IGenerateResource) {
+async function generateLoading({ path, options, ts }: IGenerateResource) {
+  const transaction = ts || new Transaction({});
+
   const { extension, style, mergeStyles = false, type, level } = options;
   const loadingFile = `loading.${extension}`;
-  const { filepath, name } = generatePath({
+  const { filepath: loading, name } = generatePath({
     path,
     filename: loadingFile,
     type,
@@ -30,14 +33,17 @@ async function generateLoading({ path, options }: IGenerateResource) {
     style: styleName,
   });
 
-  writeFile({
-    path: filepath,
-    content: loadingTemplate,
-  }).then(() => logger.log(filepath, CREATE));
+  transaction.operation({
+    action: CREATE,
+    path: loading,
+    data: loadingTemplate,
+  });
 
   if (genStyle && !mergeStyles && styleName) {
-    generateStyle({ path, file: styleName, type, level });
+    generateStyle({ path, file: styleName, type, level, ts: transaction });
   }
+
+  if (!ts) await transaction.execute();
 }
 
 export default generateLoading;

@@ -3,6 +3,10 @@
   "version": "1.0.7",
   "description": "",
   "type": "module",
+  "homepage": "https://github.com/iamendor/Next-CLI",
+  "bugs": {
+    "url": "https://github.com/iamendor/Next-CLI/issues"
+  },
   "main": "./dist/index.js",
   "bin": {
     "next-cli": "./dist/index.js"
@@ -17,7 +21,7 @@
   "publishConfig": {
     "ignore": ["examples", "node_modules", "TODO.md"]
   },
-  "keywords": [],
+  "keywords": ["nextjs", "cli"],
   "author": "iamendor",
   "license": "ISC",
   "dependencies": {

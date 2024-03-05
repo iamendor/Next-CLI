@@ -26,7 +26,7 @@ You can create a configuration file to configure the cli.
 next-cli init config
 ```
 
-The CLI does not require to use the configuration file, but I recommend to configure it per project to configure the extension, styling and etc. See the example configuration file [here](examples/example-config.json).
+The CLI does not require to use the configuration file, but I recommend to configure it per project to configure the extension, styling and etc. See the example configuration file [here](https://github.com/iamendor/Next-CLI/blob/main/examples/example-config.json).
 
 ## Commands
 

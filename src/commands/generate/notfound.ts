@@ -7,13 +7,15 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
+import { Transaction } from "../../utils/transaction.js";
 
-async function generateNotFound({ path, options }: IGenerateResource) {
+async function generateNotFound({ path, options, ts }: IGenerateResource) {
+  const transaction = ts || new Transaction({});
   const { extension, style, mergeStyles = false, type, level } = options;
-  const loadingFile = `not-found.${extension}`;
-  const { filepath, name } = generatePath({
+  const notFoundFile = `not-found.${extension}`;
+  const { filepath: notFound, name } = generatePath({
     path,
-    filename: loadingFile,
+    filename: notFoundFile,
     type,
     level,
   });
@@ -25,20 +27,28 @@ async function generateNotFound({ path, options }: IGenerateResource) {
     default: "not-found",
   });
 
-  const loadingTemplate = LoadingTemplate({
+  const notFoundTemplate = LoadingTemplate({
     name: capitalize(name),
     style: styleName,
   });
 
-  await writeFile({
-    path: filepath,
-    content: loadingTemplate,
+  transaction.operation({
+    action: CREATE,
+    path: notFound,
+    data: notFoundTemplate,
   });
-  logger.log(filepath, CREATE);
 
   if (genStyle && !mergeStyles && styleName) {
-    await generateStyle({ path, file: styleName, type, level });
+    await generateStyle({
+      path,
+      file: styleName,
+      type,
+      level,
+      ts: transaction,
+    });
   }
+
+  if (!ts) await transaction.execute();
 }
 
 export default generateNotFound;

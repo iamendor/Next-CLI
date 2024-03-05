@@ -13,6 +13,7 @@
   - [x] API handler
     - [x] create a handler function
   - [x] middleware
+  - [ ] component
 
 - [x] configuration file
   - [x] default.json
@@ -26,6 +27,7 @@
 - [x] merge style file into one - option
 - [x] typesafety for Typescript templates
 - [x] README
+- [x] file transaction
 
 # Issues
 

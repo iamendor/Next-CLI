@@ -1,5 +1,4 @@
 import logger from "../../logger/index.js";
-import writeFile from "../../utils/writefile.js";
 import generatePath from "../../utils/path.js";
 import { CREATE } from "../../actions.js";
 import { LayoutTemplate } from "../../templates/index.js";
@@ -7,11 +6,14 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
+import { Transaction } from "../../utils/transaction.js";
 
-async function generateLayout({ path, options }: IGenerateResource) {
+async function generateLayout({ path, options, ts }: IGenerateResource) {
+  const transaction = ts || new Transaction({});
+
   const { extension, style, mergeStyles = false, type, level } = options;
   const layoutFile = `layout.${extension}`;
-  const { filepath, name } = generatePath({
+  const { filepath: layout, name } = generatePath({
     path,
     filename: layoutFile,
     type,
@@ -31,15 +33,19 @@ async function generateLayout({ path, options }: IGenerateResource) {
     typesafe: extension == "tsx",
   });
 
-  await writeFile({
-    path: filepath,
-    content: layoutTemplate,
-  });
-  logger.log(filepath, CREATE);
+  transaction.operation({ action: CREATE, path: layout, data: layoutTemplate });
 
   if (genStyle && !mergeStyles && styleName) {
-    await generateStyle({ path, file: styleName, type, level });
+    await generateStyle({
+      path,
+      file: styleName,
+      type,
+      level,
+      ts: transaction,
+    });
   }
+
+  if (!ts) await transaction.execute();
 }
 
 export default generateLayout;

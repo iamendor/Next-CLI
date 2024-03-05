@@ -7,11 +7,14 @@ import generateStyle from "./style.js";
 import { IGenerateResource } from "../../interfaces/commands/generate/resource.interface.js";
 import generateStyleName from "../../utils/style.js";
 import capitalize from "../../utils/capitalize.js";
+import { Transaction } from "../../utils/transaction.js";
 
-async function generateError({ path, options }: IGenerateResource) {
+async function generateError({ path, options, ts }: IGenerateResource) {
+  const transaction = ts || new Transaction({});
+
   const { style, mergeStyles = false, type, level, extension } = options;
   const errorFile = `error.${extension}`;
-  const { filepath, name } = generatePath({
+  const { filepath: error, name } = generatePath({
     path,
     filename: errorFile,
     type,
@@ -30,14 +33,18 @@ async function generateError({ path, options }: IGenerateResource) {
     typesafe: extension == "tsx",
   });
 
-  await writeFile({
-    path: filepath,
-    content: errorTemplate,
-  });
-  logger.log(filepath, CREATE);
+  transaction.operation({ path: error, data: errorTemplate, action: CREATE });
+
   if (genStyle && !mergeStyles && styleName) {
-    await generateStyle({ path, file: styleName, type, level });
+    await generateStyle({
+      path,
+      file: styleName,
+      type,
+      level,
+      ts: transaction,
+    });
   }
+  if (!ts) await transaction.execute();
 }
 
 export default generateError;
