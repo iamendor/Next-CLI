@@ -142,7 +142,7 @@ Generate a not found file
 - `--type` - see in [module](#module)
 - `--level` - see in [module](#module)
 
-#### Not found
+#### Component
 
 ```sh
 next-cli generate component <path>
