@@ -1,6 +1,6 @@
 {
   "name": "@iamendor/next-cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A powerful CLI to create Next.js templates",
   "type": "module",
   "homepage": "https://github.com/iamendor/Next-CLI#readme",
@@ -9,7 +9,7 @@
   },
   "main": "./dist/index.js",
   "bin": {
-    "next-cli": "./dist/index.js"
+    "next": "./dist/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

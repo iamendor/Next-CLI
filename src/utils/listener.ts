@@ -36,7 +36,7 @@ export const listenIntercepting = (program: Command) => () =>
   (program.opts().type = "intercepting");
 
 export const validatePath = (path: string) => {
-  const validation = /^(?!.*[!@#$%^&*(){}[\]<>?|`~])[a-zA-Z0-9_\/-]+$/;
+  const validation = /^(?!.*[!@#$%^&*(){}[\]<>?|`~])[a-zA-Z0-9_\/\-.]+$/;
   if (!validation.test(path)) {
     throw new InvalidPathException();
   }
